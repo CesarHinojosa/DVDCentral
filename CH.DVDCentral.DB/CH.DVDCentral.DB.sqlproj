@@ -83,5 +83,18 @@
   <ItemGroup>
     <None Include="obj\Debug\CH.DVDCentral.DB.sqlproj.AssemblyReference.cache" />
     <None Include="CH.DVDCentral.DB.sqlproj.user" />
+    <None Include="PostDeploy\Default\Customers.sql" />
+    <None Include="PostDeploy\Default\Users.sql" />
+    <None Include="PostDeploy\Default\Orders.sql" />
+    <None Include="PostDeploy\Default\OrderItems.sql" />
+    <None Include="PostDeploy\Default\Genres.sql" />
+    <None Include="PostDeploy\Default\MovieGenres.sql" />
+    <None Include="PostDeploy\Default\Movies.sql" />
+    <None Include="PostDeploy\Default\Formats.sql" />
+    <None Include="PostDeploy\Default\Directors.sql" />
+    <None Include="PostDeploy\Default\Ratings.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeploy\Script.PostDeployment1.sql" />
   </ItemGroup>
 </Project>
