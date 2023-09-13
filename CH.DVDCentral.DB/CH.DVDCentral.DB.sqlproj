@@ -93,6 +93,7 @@
     <None Include="PostDeploy\DefaultData\Formats.sql" />
     <None Include="PostDeploy\DefaultData\Directors.sql" />
     <None Include="PostDeploy\DefaultData\Ratings.sql" />
+    <None Include="local.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostDeploy\Script.PostDeployment1.sql" />
