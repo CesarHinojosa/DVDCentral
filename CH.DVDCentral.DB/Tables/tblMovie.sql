@@ -8,7 +8,7 @@
     [RatingID] INT NOT NULL, 
     [Cost] FLOAT NOT NULL, 
     [Quantity] INT NOT NULL, 
-    [ImagePath] VARCHAR(100) NOT NULL
+    [ImagePath] VARCHAR(MAX) NOT NULL
 
 
 )

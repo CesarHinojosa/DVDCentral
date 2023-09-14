@@ -67,7 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\tblGenre.sql" />
-    <Build Include="Tables\tblMovieGenre.sql" />
     <Build Include="Tables\tblMovie.sql" />
     <Build Include="Tables\tblFormat.sql" />
     <Build Include="Tables\tblDirector.sql" />
@@ -76,6 +75,7 @@
     <Build Include="Tables\tblOrder.sql" />
     <Build Include="Tables\tblCustomer.sql" />
     <Build Include="Tables\tblUser.sql" />
+    <Build Include="Tables\tblMovieGenre.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="PreDeploy\Script.PreDeployment1.sql" />
@@ -88,7 +88,6 @@
     <None Include="PostDeploy\DefaultData\Orders.sql" />
     <None Include="PostDeploy\DefaultData\OrderItems.sql" />
     <None Include="PostDeploy\DefaultData\Genres.sql" />
-    <None Include="PostDeploy\DefaultData\MovieGenres.sql" />
     <None Include="PostDeploy\DefaultData\Movies.sql" />
     <None Include="PostDeploy\DefaultData\Formats.sql" />
     <None Include="PostDeploy\DefaultData\Directors.sql" />
