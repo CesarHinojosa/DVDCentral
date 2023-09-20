@@ -1,5 +1,5 @@
 ﻿BEGIN 
-	INSERT INTO tblOrder (ID, CustomerID, OrderDate, UserID)
+	INSERT INTO tblOrder (Id, CustomerId, OrderDate, UserId)
 	VALUES
 	(1, 1, '8-7-23', 1),
 	(2, 2, '9-5-22', 2),

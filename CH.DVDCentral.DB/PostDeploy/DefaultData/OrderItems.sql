@@ -1,5 +1,5 @@
 ﻿BEGIN 
-	INSERT INTO tblOrderItem (ID, OrderID, Quantity, MovieID, Cost)
+	INSERT INTO tblOrderItem (Id, OrderId, Quantity, MovieId, Cost)
 	VALUES 
 	(1, 1, 5, 1, 10.50),
 	(2, 2, 4, 2, 12.10),

@@ -1,5 +1,5 @@
 ﻿BEGIN
-	INSERT INTO tblRating (ID, Description)
+	INSERT INTO tblRating (Id, Description)
 	VALUES 
 	(1, 'PG-13'),
 	(2, 'R'),

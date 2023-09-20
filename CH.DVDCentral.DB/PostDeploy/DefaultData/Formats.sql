@@ -1,5 +1,5 @@
 ﻿BEGIN
-	INSERT INTO tblFormat (ID, Description)
+	INSERT INTO tblFormat (Id, Description)
 	VALUES
 	(1, 'DVD'),
 	(2, 'Blue-Ray'),
