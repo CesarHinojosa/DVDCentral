@@ -1,7 +1,7 @@
 ﻿BEGIN 
 	INSERT INTO tblGenre (Id, Description)
 	VALUES 
-	(1, 'Action'),
-	(2, 'Comedy'),
-	(3, 'Horror')
+	(1, 'Comedy'),
+	(2, 'Horror'),
+	(3, 'Action')
 END

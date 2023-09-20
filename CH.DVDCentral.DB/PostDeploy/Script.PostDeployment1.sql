@@ -14,6 +14,7 @@ Post-Deployment Script Template
 :r .\DefaultData\Directors.sql
 :r .\DefaultData\Formats.sql
 :r .\DefaultData\Genres.sql
+:r .\DefaultData\MovieGenres.sql
 :r .\DefaultData\Movies.sql
 :r .\DefaultData\OrderItems.sql
 :r .\DefaultData\Orders.sql

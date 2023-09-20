@@ -94,6 +94,7 @@
     <None Include="PostDeploy\DefaultData\Ratings.sql" />
     <None Include="local.publish.xml" />
     <None Include="remote.publish.xml" />
+    <None Include="PostDeploy\DefaultData\MovieGenres.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostDeploy\Script.PostDeployment1.sql" />
