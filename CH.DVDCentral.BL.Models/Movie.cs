@@ -9,12 +9,12 @@ namespace CH.DVDCentral.BL.Models
 {
     public class Movie
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
-        public int FormatID { get; set; }
-        public int DirectorID { get; set; }
-        public int RatingID { get; set; }
+        public int FormatId { get; set; }
+        public int DirectorId { get; set; }
+        public int RatingId { get; set; }
         public float Cost { get; set; }
         public int Quanity { get; set; }
         public string? ImagePath { get; set; }

@@ -8,7 +8,7 @@ namespace CH.DVDCentral.BL.Models
 {
     public class Genre
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string? Description { get; set; }
     }
 }
