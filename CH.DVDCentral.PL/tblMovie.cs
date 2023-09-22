@@ -15,7 +15,7 @@ public partial class tblMovie
 
     public int DirectorId { get; set; }
 
-    public int RatingID { get; set; }
+    public int RatingId { get; set; }
 
     public double Cost { get; set; }
 
