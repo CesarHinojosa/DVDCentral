@@ -214,7 +214,7 @@ namespace CH.DVDCentral.PL.Test
             {
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri("https://fvtcdp.azurewebsites.net/api/");
-                HttpResponseMessage response = client.GetAsync("TableStructure/Declaration").Result;
+                HttpResponseMessage response = client.GetAsync("TableStructure/DVDCentralV1").Result;
                 string result = response.Content.ReadAsStringAsync().Result;
                 structures = JsonConvert.DeserializeObject<List<Structure>>(result);
                 //TestContext.Out.WriteLine(structures.Count + " structures found.");
