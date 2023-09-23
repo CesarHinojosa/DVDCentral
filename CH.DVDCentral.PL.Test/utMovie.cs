@@ -49,6 +49,7 @@ namespace CH.DVDCentral.PL.Test
             entity.FormatId = -101;
             entity.DirectorId = -102;
             entity.RatingId = -103;
+            entity.Cost = -100;
             entity.Quantity = -99;
             entity.ImagePath = "Inserted Image";
 
@@ -71,6 +72,7 @@ namespace CH.DVDCentral.PL.Test
             entity.DirectorId = 51;
             entity.RatingId = 52;
             entity.Quantity = 55;
+            entity.Cost = 56;
             entity.ImagePath = "Updated Image Path";
 
             int result = dc.SaveChanges();
