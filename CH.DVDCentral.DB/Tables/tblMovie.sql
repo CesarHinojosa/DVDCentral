@@ -7,7 +7,7 @@
     [DirectorId] INT NOT NULL, 
     [RatingID] INT NOT NULL, 
     [Cost] FLOAT NOT NULL, 
-    [Quantity] INT NOT NULL, 
+    [InStkQty] INT NOT NULL, 
     [ImagePath] VARCHAR(MAX) NOT NULL
 
 

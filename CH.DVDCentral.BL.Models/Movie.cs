@@ -16,7 +16,7 @@ namespace CH.DVDCentral.BL.Models
         public int DirectorId { get; set; }
         public int RatingId { get; set; }
         public double Cost { get; set; }
-        public int Quanity { get; set; }
+        public int InStkQty { get; set; }
         public string? ImagePath { get; set; }
 
     }

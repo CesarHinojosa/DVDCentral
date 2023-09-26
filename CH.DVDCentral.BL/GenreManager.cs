@@ -58,7 +58,7 @@ namespace CH.DVDCentral.BL
                     //s is a represenation of a student 
                     // dc.tblStudents.Any()  yes or no if it is false then you do 1;
                     //dc.tblStudents.Any()  yes or no if it is true it does this ? dc.tblStudents.Max(s => s.Id) + 1
-                    entity.Id = dc.tblGenres.Any() ? dc.tblGenres.Max(s => s.Id) + 1 : 1;
+                    entity.Id = dc.tblGenres.Any() ? dc.tblGenres.Max(g => g.Id) + 1 : 1;
                     entity.Description = genre.Description;
 
 
@@ -83,6 +83,122 @@ namespace CH.DVDCentral.BL
 
                 throw;
             }
+        }
+
+        public static int Update(Genre genre, bool rollback = false)
+        {
+            try
+            {
+                int results = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback)
+                    {
+                        transaction = dc.Database.BeginTransaction();
+                    }
+
+                    //Get the row that we are trying to Update
+                    tblGenre entity = dc.tblGenres.FirstOrDefault(g => g.Id == genre.Id);
+
+                    if (entity != null)
+                    {
+                        entity.Description = genre.Description;
+
+                        results = dc.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Row does not exist");
+                    }
+
+                    if (rollback)
+                    {
+                        transaction.Rollback();
+                    }
+
+                }
+                return results;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static int Delete(int id, bool rollback = false)
+        {
+            try
+            {
+                int results = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback)
+                    {
+                        transaction = dc.Database.BeginTransaction();
+                    }
+
+                    //Gets the ID 
+                    tblGenre entity = dc.tblGenres.FirstOrDefault(g => g.Id == id);
+
+                    if (entity != null)
+                    {
+                        //Removes the degreeType with the selected ID
+                        dc.tblGenres.Remove(entity);
+                        results = dc.SaveChanges();
+
+                    }
+                    else
+                    {
+                        throw new Exception("Row does not exist");
+                    }
+
+                    if (rollback)
+                    {
+                        transaction.Rollback();
+                    }
+
+                }
+                return results;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static Genre LoadById(int id)
+        {
+            try
+            {
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    tblGenre entity = dc.tblGenres.FirstOrDefault(g => g.Id == id);
+
+                    if (entity != null)
+                    {
+                        return new Genre
+                        {
+                            Id = entity.Id,
+                            Description = entity.Description
+                        };
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         public static List<Genre> Load()

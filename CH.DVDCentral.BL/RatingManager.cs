@@ -58,7 +58,7 @@ namespace CH.DVDCentral.BL
                     //s is a represenation of a student 
                     // dc.tblStudents.Any()  yes or no if it is false then you do 1;
                     //dc.tblStudents.Any()  yes or no if it is true it does this ? dc.tblStudents.Max(s => s.Id) + 1
-                    entity.Id = dc.tblRatings.Any() ? dc.tblRatings.Max(s => s.Id) + 1 : 1;
+                    entity.Id = dc.tblRatings.Any() ? dc.tblRatings.Max(r => r.Id) + 1 : 1;
                     entity.Description = rating.Description;
 
 
@@ -83,6 +83,122 @@ namespace CH.DVDCentral.BL
 
                 throw;
             }
+        }
+
+        public static int Update(Rating rating, bool rollback = false)
+        {
+            try
+            {
+                int results = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback)
+                    {
+                        transaction = dc.Database.BeginTransaction();
+                    }
+
+                    //Get the row that we are trying to Update
+                    tblRating entity = dc.tblRatings.FirstOrDefault(r => r.Id == rating.Id);
+
+                    if (entity != null)
+                    {
+                        entity.Description = rating.Description;
+
+                        results = dc.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Row does not exist");
+                    }
+
+                    if (rollback)
+                    {
+                        transaction.Rollback();
+                    }
+
+                }
+                return results;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static int Delete(int id, bool rollback = false)
+        {
+            try
+            {
+                int results = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback)
+                    {
+                        transaction = dc.Database.BeginTransaction();
+                    }
+
+                    //Gets the ID 
+                    tblRating entity = dc.tblRatings.FirstOrDefault(r => r.Id == id);
+
+                    if (entity != null)
+                    {
+                        //Removes the degreeType with the selected ID
+                        dc.tblRatings.Remove(entity);
+                        results = dc.SaveChanges();
+
+                    }
+                    else
+                    {
+                        throw new Exception("Row does not exist");
+                    }
+
+                    if (rollback)
+                    {
+                        transaction.Rollback();
+                    }
+
+                }
+                return results;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static Rating LoadById(int id)
+        {
+            try
+            {
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    tblRating entity = dc.tblRatings.FirstOrDefault(r => r.Id == id);
+
+                    if (entity != null)
+                    {
+                        return new Rating
+                        {
+                            Id = entity.Id,
+                            Description = entity.Description
+                        };
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         public static List<Rating> Load()

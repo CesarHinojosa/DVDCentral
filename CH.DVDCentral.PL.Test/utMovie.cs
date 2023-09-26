@@ -50,7 +50,7 @@ namespace CH.DVDCentral.PL.Test
             entity.DirectorId = -102;
             entity.RatingId = -103;
             entity.Cost = -100;
-            entity.Quantity = -99;
+            entity.InStkQty = -99;
             entity.ImagePath = "Inserted Image";
 
             dc.tblMovies.Add(entity);
@@ -71,7 +71,7 @@ namespace CH.DVDCentral.PL.Test
             entity.FormatId = 50;
             entity.DirectorId = 51;
             entity.RatingId = 52;
-            entity.Quantity = 55;
+            entity.InStkQty = 55;
             entity.Cost = 56;
             entity.ImagePath = "Updated Image Path";
 

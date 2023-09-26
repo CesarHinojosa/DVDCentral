@@ -19,7 +19,7 @@ namespace CH.DVDCentral.BL
                                  int directorId,
                                  int ratingId,
                                  float cost,
-                                 int quantity,
+                                 int InStkQty,
                                  string imagepath,
                                  ref int id,       // this is by reference (ref or out)
                                  bool rollback = false) //optional paramater
@@ -34,7 +34,7 @@ namespace CH.DVDCentral.BL
                     DirectorId = directorId,
                     RatingId = ratingId,
                     Cost = cost,
-                    Quanity = quantity,
+                    InStkQty = InStkQty,
                     ImagePath = imagepath
 
                 };
@@ -73,14 +73,14 @@ namespace CH.DVDCentral.BL
                     //s is a represenation of a student 
                     // dc.tblStudents.Any()  yes or no if it is false then you do 1;
                     //dc.tblStudents.Any()  yes or no if it is true it does this ? dc.tblStudents.Max(s => s.Id) + 1
-                    entity.Id = dc.tblMovies.Any() ? dc.tblMovies.Max(s => s.Id) + 1 : 1;
+                    entity.Id = dc.tblMovies.Any() ? dc.tblMovies.Max(m => m.Id) + 1 : 1;
                     entity.Title = movie.Title;
                     entity.Description = movie.Description;
                     entity.FormatId = movie.FormatId;
                     entity.DirectorId = movie.DirectorId;
                     entity.RatingId = movie.RatingId;
                     entity.Cost = movie.Cost;
-                    entity.Quantity = movie.Quanity;
+                    entity.InStkQty = movie.InStkQty;
                     entity.ImagePath = movie.ImagePath;
 
 
@@ -107,6 +107,136 @@ namespace CH.DVDCentral.BL
             }
         }
 
+        public static int Update(Movie movie, bool rollback = false)
+        {
+            try
+            {
+                int results = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback)
+                    {
+                        transaction = dc.Database.BeginTransaction();
+                    }
+
+                    //Get the row that we are trying to Update
+                    tblMovie entity = dc.tblMovies.FirstOrDefault(m => m.Id == movie.Id);
+
+                    if (entity != null)
+                    {
+                        entity.Title = movie.Title;
+                        entity.Description = movie.Description;
+                        entity.FormatId = movie.FormatId;
+                        entity.DirectorId = movie.DirectorId;
+                        entity.RatingId = movie.RatingId;
+                        entity.Cost = movie.Cost;
+                        entity.InStkQty = movie.InStkQty;
+                        entity.ImagePath = movie.ImagePath;
+
+                        results = dc.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Row does not exist");
+                    }
+
+                    if (rollback)
+                    {
+                        transaction.Rollback();
+                    }
+
+                }
+                return results;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static int Delete(int id, bool rollback = false)
+        {
+            try
+            {
+                int results = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback)
+                    {
+                        transaction = dc.Database.BeginTransaction();
+                    }
+
+                    //Gets the ID 
+                    tblMovie entity = dc.tblMovies.FirstOrDefault(m => m.Id == id);
+
+                    if (entity != null)
+                    {
+                        //Removes the degreeType with the selected ID
+                        dc.tblMovies.Remove(entity);
+                        results = dc.SaveChanges();
+
+                    }
+                    else
+                    {
+                        throw new Exception("Row does not exist");
+                    }
+
+                    if (rollback)
+                    {
+                        transaction.Rollback();
+                    }
+
+                }
+                return results;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static Movie LoadById(int id)
+        {
+            try
+            {
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    tblMovie entity = dc.tblMovies.FirstOrDefault(m => m.Id == id);
+
+                    if (entity != null)
+                    {
+                        return new Movie
+                        {
+                            Id = entity.Id,
+                            Title = entity.Title,
+                            Description = entity.Description,
+                            FormatId = entity.FormatId,
+                            DirectorId = entity.DirectorId,
+                            RatingId = entity.RatingId,
+                            Cost = entity.Cost, 
+                            InStkQty = entity.InStkQty, 
+                            ImagePath = entity.ImagePath,
+                        };
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         public static List<Movie> Load()
         {
             try
@@ -125,7 +255,7 @@ namespace CH.DVDCentral.BL
                          m.DirectorId,
                          m.RatingId,
                          m.Cost,
-                         m.Quantity,
+                         m.InStkQty,
                          m.ImagePath,
                      })
                      .ToList()
@@ -138,6 +268,7 @@ namespace CH.DVDCentral.BL
                          DirectorId = movie.DirectorId,
                          RatingId = movie.RatingId,
                          Cost = movie.Cost,
+                         InStkQty = movie.InStkQty,
                          ImagePath = movie.ImagePath,
 
                      }));
