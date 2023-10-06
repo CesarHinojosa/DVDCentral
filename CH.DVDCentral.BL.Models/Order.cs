@@ -12,8 +12,9 @@ namespace CH.DVDCentral.BL.Models
         public int CustomerId { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime ShipDate { get; set; }
-
         public int UserId { get; set; }
+
+        public List<OrderItem> OrderItems { get; set; }
 
     }
 }

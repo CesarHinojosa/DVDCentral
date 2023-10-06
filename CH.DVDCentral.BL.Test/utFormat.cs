@@ -37,9 +37,9 @@ namespace CH.DVDCentral.BL.Test
         public void UpdateTest()
         {
             //In order to see an update you need to have things updated
-            Format degreeType = FormatManager.LoadById(3);
-            degreeType.Description = "Updated Description";
-            int results = FormatManager.Update(degreeType, true);
+            Format format = FormatManager.LoadById(3);
+            format.Description = "Updated Description";
+            int results = FormatManager.Update(format, true);
             //Number of Rows updated
             Assert.AreEqual(1, results);
         }

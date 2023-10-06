@@ -15,6 +15,8 @@ namespace CH.DVDCentral.BL.Models
         public int UserID { get; set; }
         public string? Address { get; set; }
         public string? City { get; set; }
+        
+        public string? State { get; set; }
         public string? Zip { get; set; }
         public string? Phone { get; set; }
         public string? ImagePath { get; set; }

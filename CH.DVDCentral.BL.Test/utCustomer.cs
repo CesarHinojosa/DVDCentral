@@ -3,19 +3,19 @@
 namespace CH.DVDCentral.BL.Test
 {
     [TestClass]
-    public class utDirector
+    public class utCustomer
     {
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, DirectorManager.Load().Count);
+            Assert.AreEqual(3, CustomerManager.Load().Count);
         }
 
         //[TestMethod]
         //public void InsertTest1()
         //{
         //    int id = 0;
-        //    int results = DirectorManager.Insert("Test Insert Director FN", "Test Insert Director LN", ref id, true);
+        //    int results = CustomerManager.Insert("Test Insert Customer FN", "Test Insert Customer LN", ref id, true);
         //    Assert.AreEqual(1, results);
         //}
 
@@ -24,13 +24,21 @@ namespace CH.DVDCentral.BL.Test
         public void InsertTest()
         {
             int id = 0;
-            Director director = new Director
+            Customer customer = new Customer
             {
                 FirstName = "Test",
-                LastName = "Test"
-                
+                LastName = "Test",
+                UserID = 9,
+                Address = "Test",
+                City = "Test",  
+                State = "WI", // Has to be only two characters 
+                Zip = "Test",
+                Phone = "Test",
+                ImagePath = "Test"
+
+
             };
-            int results = DirectorManager.Insert(director, true);
+            int results = CustomerManager.Insert(customer, true);
             Assert.AreEqual(1, results);
         }
 
@@ -38,9 +46,9 @@ namespace CH.DVDCentral.BL.Test
         public void UpdateTest()
         {
             //In order to see an update you need to have things updated
-            Director director = DirectorManager.LoadById(3);
-            director.FirstName = "Updated Test";
-            int results = DirectorManager.Update(director, true);
+            Customer customer = CustomerManager.LoadById(3);
+            customer.FirstName = "Updated Test";
+            int results = CustomerManager.Update(customer, true);
             //Number of Rows updated
             Assert.AreEqual(1, results);
         }
@@ -48,7 +56,7 @@ namespace CH.DVDCentral.BL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            int results = DirectorManager.Delete(3, true);
+            int results = CustomerManager.Delete(3, true);
             Assert.AreEqual(1, results);
         }
     }

@@ -1,21 +1,21 @@
-using CH.DVDCentral.BL.Models;
+﻿using CH.DVDCentral.BL.Models;
 
 namespace CH.DVDCentral.BL.Test
 {
     [TestClass]
-    public class utGenre
+    public class utOrder
     {
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, GenreManager.Load().Count);
+            Assert.AreEqual(3, OrderManager.Load().Count);
         }
 
         //[TestMethod]
         //public void InsertTest1()
         //{
         //    int id = 0;
-        //    int results = GenreManager.Insert("Inserted Description", ref id, true);
+        //    int results = OrderManager.Insert("Inserted Description", ref id, true);
 
         //    Assert.AreEqual(1, results);
         //}
@@ -25,11 +25,12 @@ namespace CH.DVDCentral.BL.Test
         public void InsertTest()
         {
             int id = 0;
-            Genre genre = new Genre
+            Order format = new Order
             {
-                Description = "Description"
+                CustomerId = 8,
+                UserId = 9
             };
-            int results = GenreManager.Insert(genre, true);
+            int results = OrderManager.Insert(format, true);
             Assert.AreEqual(1, results);
         }
 
@@ -37,9 +38,9 @@ namespace CH.DVDCentral.BL.Test
         public void UpdateTest()
         {
             //In order to see an update you need to have things updated
-            Genre genre = GenreManager.LoadById(3);
-            genre.Description = "Updated Description";
-            int results = GenreManager.Update(genre, true);
+            Order order = OrderManager.LoadById(3);
+            order.UserId = 5;
+            int results = OrderManager.Update(order, true);
             //Number of Rows updated
             Assert.AreEqual(1, results);
         }
@@ -47,7 +48,7 @@ namespace CH.DVDCentral.BL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            int results = GenreManager.Delete(3, true);
+            int results = OrderManager.Delete(3, true);
             Assert.AreEqual(1, results);
         }
     }
