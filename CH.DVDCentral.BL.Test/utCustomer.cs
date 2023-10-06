@@ -1,4 +1,5 @@
 ﻿using CH.DVDCentral.BL.Models;
+using CH.DVDCentral.PL;
 
 namespace CH.DVDCentral.BL.Test
 {
@@ -58,6 +59,15 @@ namespace CH.DVDCentral.BL.Test
         {
             int results = CustomerManager.Delete(3, true);
             Assert.AreEqual(1, results);
+        }
+
+        [TestMethod]
+        public void LoadByIdTest()
+        {
+            Customer customer = CustomerManager.LoadById(3);
+
+
+            Assert.AreEqual(3, customer.Id);
         }
     }
 }
