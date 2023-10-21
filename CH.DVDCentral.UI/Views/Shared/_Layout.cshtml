@@ -45,10 +45,35 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 sidebar rounded-top">
+                <div class="header rounded-top">
+                    <h4>Genres</h4>
+                </div>
+
+                <div>
+                    <!--Displays the list of the Genres -->
+                    @await Component.InvokeAsync("Sidebar")
+                </div>
+                <!--Need to att eh all link for movie-->
+                
+
+            </div>
+
+
+            <div class="col-md-9 main body-content rounded-top">
+                <div class="header rounded-top">
+                    <h4>Title</h4>
+                </div>
+                <div class="text-danger ms-2">
+                    @ViewBag.Error
+                </div>
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+            </div>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">

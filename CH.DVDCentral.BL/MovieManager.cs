@@ -237,7 +237,7 @@ namespace CH.DVDCentral.BL
 
         }
 
-        public static List<Movie> Load()
+        public static List<Movie> Load(int? genreId = null )
         {
             try
             {
@@ -245,7 +245,14 @@ namespace CH.DVDCentral.BL
 
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
+                    
                     (from m in dc.tblMovies
+                     join d in dc.tblDirectors on m.DirectorId equals d.Id
+                     join r in dc.tblRatings on m.RatingId equals r.Id
+                     join f in dc.tblFormats on m.FormatId equals f.Id
+                     join mg in dc.tblMovieGenres on m.Id equals mg.MovieId 
+                     where mg.GenreId == genreId || genreId == null
+                     
                      select new
                      {
                          m.Id,
@@ -257,6 +264,10 @@ namespace CH.DVDCentral.BL
                          m.Cost,
                          m.InStkQty,
                          m.ImagePath,
+                         RatingDescription = r.Description,
+                         FormatDescription = f.Description,
+                         FullName = d.FirstName + " " + d.LastName,
+
                      })
                      .ToList()
                      .ForEach(movie => list.Add(new Movie
@@ -270,6 +281,9 @@ namespace CH.DVDCentral.BL
                          Cost = movie.Cost,
                          InStkQty = movie.InStkQty,
                          ImagePath = movie.ImagePath,
+                         RatingDescription = movie.RatingDescription,
+                         FormatDescription = movie.FormatDescription,
+                         FullName = movie.FullName
 
                      }));
                 }

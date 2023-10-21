@@ -199,8 +199,11 @@ namespace CH.DVDCentral.BL
                             CustomerId = entity.CustomerId,
                             UserId = entity.UserId,
                             ShipDate = entity.ShipDate,
-                            OrderDate = entity.OrderDate
+                            OrderDate = entity.OrderDate,
+                            //OrderItems = orderItemManager.LoadById(orderid)
+                            
                         };
+                       
                     }
                     else
                     {
@@ -216,7 +219,7 @@ namespace CH.DVDCentral.BL
             }
         }
 
-        public static List<Order> Load()
+        public static List<Order> Load(int? customerId = null)
         {
             try
             {
@@ -225,6 +228,7 @@ namespace CH.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     (from d in dc.tblOrders
+                     where d.CustomerId == customerId || customerId == null
                      select new
                      {
                          d.Id,
@@ -232,7 +236,6 @@ namespace CH.DVDCentral.BL
                          d.UserId,
                          d.OrderDate,
                          d.ShipDate
-
 
                      })
                      .ToList()

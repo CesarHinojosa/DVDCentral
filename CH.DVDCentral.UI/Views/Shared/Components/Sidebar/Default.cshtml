@@ -1,0 +1,13 @@
+﻿@model IEnumerable<CH.DVDCentral.BL.Models.Genre>
+<!--List inherits from IEnumerable-->
+<ul>
+    @foreach (var genre in Model)
+    {
+        <li>
+            <a asp-controller="Declaration"
+               asp-action="Browse">  @genre.Description</a>
+
+        </li>
+    }
+</ul>
+
