@@ -11,28 +11,16 @@ namespace CH.DVDCentral.BL.Test
             Assert.AreEqual(3, OrderManager.Load().Count);
         }
 
-        //[TestMethod]
-        //public void InsertTest1()
-        //{
-        //    int id = 0;
-        //    int results = OrderManager.Insert("Inserted Description", ref id, true);
 
-        //    Assert.AreEqual(1, results);
-        //}
-
-        //overload
         [TestMethod]
-        public void InsertTest()
+        public void InsertTest1()
         {
             int id = 0;
-            Order format = new Order
-            {
-                CustomerId = 8,
-                UserId = 9
-            };
-            int results = OrderManager.Insert(format, true);
+            int results = OrderManager.Insert(8, 5, ref id, true);
+
             Assert.AreEqual(1, results);
         }
+
 
         [TestMethod]
         public void UpdateTest()
@@ -51,5 +39,40 @@ namespace CH.DVDCentral.BL.Test
             int results = OrderManager.Delete(3, true);
             Assert.AreEqual(1, results);
         }
+
+        //[TestMethod]
+        //public void InsertOrderItemsTest()
+        //{
+        //    Order order = new Order
+        //    {
+        //        CustomerId = 99,
+        //        OrderDate = DateTime.Now,
+        //        UserId = 99,
+        //        ShipDate = DateTime.Now,
+        //        OrderItems = new List<OrderItem>()
+        //        {
+        //            new OrderItem
+        //            {
+        //                Id = 88,
+        //                MovieId = 1,
+        //                Cost = 105,
+        //                Quantity = 3
+        //            },
+        //             new OrderItem
+        //            {
+        //                Id = 99,
+        //                MovieId = 5,
+        //                Cost = 105,
+        //                Quantity = 8
+        //            }
+
+        //        }
+        //    };
+        //    int result = OrderManager.Insert(order, true);
+        //    Assert.AreEqual(order.OrderItems[1].OrderId, order.Id);
+        //    Assert.AreEqual (3, result);
+        //}
+      
+        
     }
 }

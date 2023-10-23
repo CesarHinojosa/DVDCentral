@@ -186,7 +186,8 @@ namespace CH.DVDCentral.BL
             }
         }
 
-        public static OrderItem LoadById(int id)
+        //returns the stuff for the given ID
+        public static OrderItem Load(int id)
         {
             try
             {
@@ -221,7 +222,8 @@ namespace CH.DVDCentral.BL
 
         }
 
-        public static List<OrderItem> Load()
+        //loads the things for the given order Id
+        public static List<OrderItem> LoadByOrderId()
         {
             try
             {
@@ -230,6 +232,7 @@ namespace CH.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     (from m in dc.tblOrderItems
+                     //where m.Id == orderId || orderId == null
                      select new
                      {
                          m.Id,
@@ -258,5 +261,7 @@ namespace CH.DVDCentral.BL
                 throw;
             }
         }
+
+
     }
 }

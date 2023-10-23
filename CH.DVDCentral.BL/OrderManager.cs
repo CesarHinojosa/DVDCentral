@@ -1,5 +1,6 @@
 ﻿using CH.DVDCentral.BL.Models;
 using CH.DVDCentral.PL;
+using Microsoft.CodeAnalysis.Elfie.Model;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace CH.DVDCentral.BL
             //Reference or by value 
             //No idea what the ID is
             //We know the FN,LN,OrderID
+            
             try
             {
                 Order order = new Order
@@ -30,9 +32,11 @@ namespace CH.DVDCentral.BL
                     UserId = userId,
                     OrderDate = DateTime.Now,
                     ShipDate = DateTime.Now,
-                  
+                    
+ 
                 };
 
+                //this should be the one that changes
                 int results = Insert(order, rollback);
 
                 //IMPORTANT - BACKFILL THE REFERENCE ID 
@@ -47,6 +51,8 @@ namespace CH.DVDCentral.BL
             }
 
         }
+
+       
 
         //this does all the hard lifting this is the overlaod method 
         public static int Insert(Order order, bool rollback = false)
@@ -74,11 +80,18 @@ namespace CH.DVDCentral.BL
                     entity.OrderDate = DateTime.Now;
                     entity.ShipDate = DateTime.Now;
 
+                    //foreach(OrderItem item in order.OrderItems)
+                    //{
+                    //    item.OrderId = entity.Id;
+                    //    results += OrderItemManager.Insert(item, rollback);
+                    //}
+
 
                     // IMPORTANT - BACK FILL THE ID 
                     //YOU CAN'T PASS AN OBJECT BY VALUE 
                     //IT IS BY REFERENCE 
                     order.Id = entity.Id;
+                    
 
                     dc.tblOrders.Add(entity);
                     results = dc.SaveChanges();
@@ -200,7 +213,7 @@ namespace CH.DVDCentral.BL
                             UserId = entity.UserId,
                             ShipDate = entity.ShipDate,
                             OrderDate = entity.OrderDate,
-                            //OrderItems = orderItemManager.LoadById(orderid)
+                          
                             
                         };
                        
@@ -219,7 +232,7 @@ namespace CH.DVDCentral.BL
             }
         }
 
-        public static List<Order> Load(int? customerId = null)
+        public static List<Order> Load(int? CustomerId = null)
         {
             try
             {
@@ -228,14 +241,15 @@ namespace CH.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     (from d in dc.tblOrders
-                     where d.CustomerId == customerId || customerId == null
+                     where d.CustomerId == CustomerId || CustomerId == null
                      select new
                      {
                          d.Id,
                          d.CustomerId,
                          d.UserId,
                          d.OrderDate,
-                         d.ShipDate
+                         d.ShipDate,
+                         
 
                      })
                      .ToList()
@@ -245,7 +259,9 @@ namespace CH.DVDCentral.BL
                          CustomerId = order.CustomerId,
                          UserId = order.UserId,
                          OrderDate = order.OrderDate,
-                         ShipDate = order.ShipDate
+                         ShipDate = order.ShipDate,
+                         
+
 
                      }));
                 }
