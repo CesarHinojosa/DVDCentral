@@ -40,39 +40,63 @@ namespace CH.DVDCentral.BL.Test
             Assert.AreEqual(1, results);
         }
 
-        //[TestMethod]
-        //public void InsertOrderItemsTest()
-        //{
-        //    Order order = new Order
-        //    {
-        //        CustomerId = 99,
-        //        OrderDate = DateTime.Now,
-        //        UserId = 99,
-        //        ShipDate = DateTime.Now,
-        //        OrderItems = new List<OrderItem>()
-        //        {
-        //            new OrderItem
-        //            {
-        //                Id = 88,
-        //                MovieId = 1,
-        //                Cost = 105,
-        //                Quantity = 3
-        //            },
-        //             new OrderItem
-        //            {
-        //                Id = 99,
-        //                MovieId = 5,
-        //                Cost = 105,
-        //                Quantity = 8
-        //            }
+        [TestMethod]
+        public void InsertOrderItemsTest()
+        {
+            Order order = new Order
+            {
+                CustomerId = 99,
+                OrderDate = DateTime.Now,
+                UserId = 99,
+                ShipDate = DateTime.Now,
+                OrderItems = new List<OrderItem>()
+                {
+                    new OrderItem
+                    {
+                        Id = 88,
+                        MovieId = 1,
+                        Cost = 105,
+                        Quantity = 3
+                    },
+                     new OrderItem
+                    {
+                        Id = 99,
+                        MovieId = 5,
+                        Cost = 105,
+                        Quantity = 8
+                    }
 
-        //        }
-        //    };
-        //    int result = OrderManager.Insert(order, true);
-        //    Assert.AreEqual(order.OrderItems[1].OrderId, order.Id);
-        //    Assert.AreEqual (3, result);
-        //}
-      
-        
+                }
+            };
+            int result = OrderManager.Insert(order, true);
+            Assert.AreEqual(order.OrderItems[1].OrderId, order.Id);
+            Assert.AreEqual(3, result);
+        }
+
+        [TestMethod]
+        public void LoadByIdTest()
+        {
+            int id = OrderManager.Load().LastOrDefault().Id;
+            Order order = OrderManager.LoadById(id);
+            Assert.AreEqual(order.Id, id);
+            Assert.IsTrue(order.OrderItems.Count > 0);
+        }
+
+        [TestMethod]
+        public void LoadByIdCustomerIdTest()
+        {
+            int customerId = OrderManager.Load().FirstOrDefault().CustomerId;
+            Assert.AreEqual(OrderManager.LoadById(customerId).CustomerId, customerId);
+        }
+
+        //does not work
+        [TestMethod]
+        public void LoadByOrderIdTest()
+        {
+            int orderId = OrderItemManager.Load().FirstOrDefault().OrderId;
+            Assert.IsTrue(OrderItemManager.Load(orderId).Count > 0);
+        }
+
+
     }
 }

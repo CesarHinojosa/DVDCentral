@@ -80,11 +80,12 @@ namespace CH.DVDCentral.BL
                     entity.OrderDate = DateTime.Now;
                     entity.ShipDate = DateTime.Now;
 
-                    //foreach(OrderItem item in order.OrderItems)
-                    //{
-                    //    item.OrderId = entity.Id;
-                    //    results += OrderItemManager.Insert(item, rollback);
-                    //}
+                    foreach (OrderItem item in order.OrderItems)
+                    {
+                       
+                        item.OrderId = entity.Id;
+                        results += OrderItemManager.Insert(item, rollback);
+                    }
 
 
                     // IMPORTANT - BACK FILL THE ID 
@@ -92,9 +93,10 @@ namespace CH.DVDCentral.BL
                     //IT IS BY REFERENCE 
                     order.Id = entity.Id;
                     
+                    
 
                     dc.tblOrders.Add(entity);
-                    results = dc.SaveChanges();
+                    results += dc.SaveChanges();
 
                     if (rollback)
                     {
@@ -213,6 +215,7 @@ namespace CH.DVDCentral.BL
                             UserId = entity.UserId,
                             ShipDate = entity.ShipDate,
                             OrderDate = entity.OrderDate,
+                            OrderItems = OrderItemManager.Load(entity.Id)
                           
                             
                         };
@@ -232,7 +235,7 @@ namespace CH.DVDCentral.BL
             }
         }
 
-        public static List<Order> Load(int? CustomerId = null)
+        public static List<Order> Load(int? customerId = null)
         {
             try
             {
@@ -241,7 +244,7 @@ namespace CH.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     (from d in dc.tblOrders
-                     where d.CustomerId == CustomerId || CustomerId == null
+                     where d.CustomerId == customerId || customerId == null
                      select new
                      {
                          d.Id,
@@ -260,6 +263,7 @@ namespace CH.DVDCentral.BL
                          UserId = order.UserId,
                          OrderDate = order.OrderDate,
                          ShipDate = order.ShipDate,
+                         OrderItems = OrderItemManager.Load(order.Id)
                          
 
 

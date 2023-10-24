@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -187,13 +188,24 @@ namespace CH.DVDCentral.BL
         }
 
         //returns the stuff for the given ID
-        public static OrderItem Load(int id)
+        public static OrderItem LoadById(int id)
         {
             try
             {
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    tblOrderItem entity = dc.tblOrderItems.FirstOrDefault(m => m.Id == id);
+                    var entity = (from m in dc.tblOrderItems
+                                  join o in dc.tblOrders on m.OrderId equals o.Id
+                                  where m.OrderId == id
+                                  select new
+                                  {
+                                      m.Id,
+                                      m.OrderId,
+                                      m.Quantity,
+                                      m.MovieId,
+                                      m.Cost,
+                                  })
+                                  .FirstOrDefault();
 
                     if (entity != null)
                     {
@@ -223,7 +235,7 @@ namespace CH.DVDCentral.BL
         }
 
         //loads the things for the given order Id
-        public static List<OrderItem> LoadByOrderId()
+        public static List<OrderItem> Load(int? orderId = null)
         {
             try
             {
@@ -232,14 +244,13 @@ namespace CH.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     (from m in dc.tblOrderItems
-                     //where m.Id == orderId || orderId == null
                      select new
                      {
                          m.Id,
                          m.OrderId,
                          m.Quantity,
                          m.MovieId,
-                         m.Cost
+                         m.Cost,
                      })
                      .ToList()
                      .ForEach(movie => list.Add(new OrderItem

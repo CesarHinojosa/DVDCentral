@@ -9,7 +9,7 @@ namespace CH.DVDCentral.BL.Test
         public void LoadTest()
         {
             //gets the orderId of 3 and makes sures there is one thing in there
-            Assert.AreEqual(3, OrderItemManager.LoadByOrderId().Count);
+            Assert.AreEqual(3, OrderItemManager.Load().Count);
         }
 
         //overload
@@ -34,12 +34,11 @@ namespace CH.DVDCentral.BL.Test
         [TestMethod]
         public void UpdateTest()
         {
-            //In order to see an update you need to have things updated
-            OrderItem orderItem = OrderItemManager.Load(3);
+            OrderItem orderItem = OrderItemManager.LoadById(2);
             orderItem.Cost = 35;
-            int results = OrderItemManager.Update(orderItem, true);
-            //Number of Rows updated
-            Assert.AreEqual(1, results);
+            int result = OrderItemManager.Update(orderItem, true);
+            Assert.AreEqual(1, result);
+
         }
 
         [TestMethod]
