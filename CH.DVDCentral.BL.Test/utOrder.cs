@@ -89,13 +89,7 @@ namespace CH.DVDCentral.BL.Test
             Assert.AreEqual(OrderManager.LoadById(customerId).CustomerId, customerId);
         }
 
-        //does not work
-        [TestMethod]
-        public void LoadByOrderIdTest()
-        {
-            int orderId = OrderItemManager.Load().FirstOrDefault().OrderId;
-            Assert.IsTrue(OrderItemManager.Load(orderId).Count > 0);
-        }
+        
 
 
     }

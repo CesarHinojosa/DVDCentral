@@ -47,5 +47,13 @@ namespace CH.DVDCentral.BL.Test
             int results = OrderItemManager.Delete(3, true);
             Assert.AreEqual(1, results);
         }
+
+        //does not work with loadbyId
+        [TestMethod]
+        public void LoadByOrderIdTest()
+        {
+            int orderId = OrderItemManager.Load().FirstOrDefault().OrderId;
+            Assert.IsTrue(OrderItemManager.Load(orderId).Count > 0);
+        }
     }
 }
