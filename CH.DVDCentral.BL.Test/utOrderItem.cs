@@ -53,7 +53,7 @@ namespace CH.DVDCentral.BL.Test
         public void LoadByOrderIdTest()
         {
             int orderId = OrderItemManager.Load().FirstOrDefault().OrderId;
-            Assert.IsTrue(OrderItemManager.Load(orderId).Count > 0);
+            Assert.IsTrue(OrderItemManager.LoadByOrderId(orderId).Count > 0);
         }
     }
 }

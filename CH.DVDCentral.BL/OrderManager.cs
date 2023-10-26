@@ -215,7 +215,7 @@ namespace CH.DVDCentral.BL
                             UserId = entity.UserId,
                             ShipDate = entity.ShipDate,
                             OrderDate = entity.OrderDate,
-                            OrderItems = OrderItemManager.Load(entity.Id)
+                            OrderItems = OrderItemManager.LoadByOrderId(entity.Id)
                           
                             
                         };
@@ -263,7 +263,7 @@ namespace CH.DVDCentral.BL
                          UserId = order.UserId,
                          OrderDate = order.OrderDate,
                          ShipDate = order.ShipDate,
-                         OrderItems = OrderItemManager.Load(order.Id)
+                         OrderItems = OrderItemManager.LoadByOrderId(order.Id)
                          
 
 

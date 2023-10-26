@@ -235,7 +235,7 @@ namespace CH.DVDCentral.BL
         }
 
         //loads the things for the given order Id
-        public static List<OrderItem> Load(int? orderId = null)
+        public static List<OrderItem> Load()
         {
             try
             {
@@ -261,6 +261,45 @@ namespace CH.DVDCentral.BL
                          MovieId = movie.MovieId,
                          Cost = (float)movie.Cost,
                          
+
+                     }));
+                }
+
+                return list;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static List<OrderItem> LoadByOrderId(int orderId)
+        {
+            try
+            {
+                List<OrderItem> list = new List<OrderItem>();
+
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    (from m in dc.tblOrderItems
+                     where m.OrderId == orderId
+                     select new
+                     {
+                         m.Id,
+                         m.OrderId,
+                         m.Quantity,
+                         m.MovieId,
+                         m.Cost,
+                     })
+                     .ToList()
+                     .ForEach(movie => list.Add(new OrderItem
+                     {
+                         Id = movie.Id,
+                         OrderId = movie.OrderId,
+                         Quantity = movie.Quantity,
+                         MovieId = movie.MovieId,
+                         Cost = (float)movie.Cost,
+
 
                      }));
                 }
