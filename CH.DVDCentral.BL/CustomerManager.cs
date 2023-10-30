@@ -271,7 +271,14 @@ namespace CH.DVDCentral.BL
                      {
                          Id = customer.Id,
                          FirstName = customer.FirstName,
-                         LastName = customer.LastName
+                         LastName = customer.LastName,
+                         UserID = customer.UserId,
+                         Address = customer.Address,
+                         City = customer.City,
+                         State = customer.State,
+                         Zip = customer.ZIP,
+                         Phone = customer.Phone,
+                         ImagePath = customer.ImagePath,
 
                      }));
                 }
