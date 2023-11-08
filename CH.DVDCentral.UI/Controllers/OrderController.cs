@@ -18,6 +18,7 @@ namespace CH.DVDCentral.UI.Controllers
 
         public IActionResult Create()
         {
+
             ViewBag.Title = "Create a Program";
             if (Authenticate.IsAuthenticated(HttpContext))
             {
