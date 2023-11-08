@@ -52,19 +52,19 @@ namespace CH.DVDCentral.UI.Controllers
 
         public IActionResult Edit(int id)
         {
-            return View(OrderManager.LoadById(id));
+           
 
-            //ViewBag.Title = "Edit a Order";
-            //if (Authenticate.IsAuthenticated(HttpContext))
-            //{
-            //    return View(OrderManager.LoadById(id));
-            //}
-            //else
-            //{
-            //    //first is action result
-            //    //second is the controller
-            //    return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
-            //}
+            ViewBag.Title = "Edit a Order";
+            if (Authenticate.IsAuthenticated(HttpContext))
+            {
+                return View(OrderManager.LoadById(id));
+            }
+            else
+            {
+                //first is action result
+                //second is the controller
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            }
         }
 
         [HttpPost]
