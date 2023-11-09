@@ -46,7 +46,7 @@ namespace CH.DVDCentral.BL
                     entity.Id = dc.tblUsers.Any() ? dc.tblUsers.Max(s => s.Id) + 1 : 1;
                     entity.FirstName = user.FirstName;
                     entity.LastName = user.LastName;
-                    entity.UserId = user.UserId;
+                    entity.UserName = user.UserName;
                     entity.Password = GetHash(user.Password); // remeber this line 
 
 
@@ -82,7 +82,7 @@ namespace CH.DVDCentral.BL
                     User user = new User
                     {
                         
-                        UserId = "kfrog",
+                        UserName = "kfrog",
                         FirstName = "Kermit",
                         LastName = "The frog",
                         Password = "misspiggy"
@@ -91,7 +91,7 @@ namespace CH.DVDCentral.BL
 
                     user = new User
                     {
-                        UserId = "bfoote",
+                        UserName = "bfoote",
                         FirstName = "Brain",
                         LastName = "Foote",
                         Password = "maple"
@@ -138,14 +138,14 @@ namespace CH.DVDCentral.BL
         {
             try
             {
-                if (!string.IsNullOrEmpty(user.UserId))
+                if (!string.IsNullOrEmpty(user.UserName))
                 {
                     if (!string.IsNullOrEmpty(user.Password))
                     {
                         using (DVDCentralEntities dc = new DVDCentralEntities())
                         {
                             //Getting the user Id
-                            tblUser tblUser = dc.tblUsers.FirstOrDefault(u => u.UserId == user.UserId);
+                            tblUser tblUser = dc.tblUsers.FirstOrDefault(u => u.UserName == user.UserName);
                             if (tblUser != null)
                             {
                                 if (tblUser.Password == GetHash(user.Password))
@@ -202,7 +202,7 @@ namespace CH.DVDCentral.BL
                      select new
                      {
                          u.Id,
-                         u.UserId,
+                         u.UserName,
                          u.FirstName,
                          u.LastName,
                          u.Password
@@ -211,7 +211,7 @@ namespace CH.DVDCentral.BL
                      .ForEach(user => list.Add(new User
                      {
                          Id = user.Id,
-                         UserId = user.UserId,
+                         UserName = user.UserName,
                          FirstName = user.FirstName,
                          LastName = user.LastName,
                          Password = user.Password
@@ -248,7 +248,7 @@ namespace CH.DVDCentral.BL
                     {
                        //entity.FirstName = user.FirstName;
                         //entity.LastName = user.LastName;
-                        entity.UserId = user.UserId;
+                        entity.UserName = user.UserName;
                         entity.Password = user.Password;
 
                         results = dc.SaveChanges();
@@ -288,7 +288,7 @@ namespace CH.DVDCentral.BL
                             Id = entity.Id,
                             FirstName = entity.FirstName,
                             LastName = entity.LastName,
-                            UserId = entity.UserId,
+                            UserName = entity.UserName,
                             Password = entity.Password,
 
                         };

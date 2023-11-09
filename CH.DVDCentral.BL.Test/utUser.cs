@@ -28,12 +28,12 @@ namespace CH.DVDCentral.BL.Test
             Seed();
             Assert.IsTrue(UserManager.Login(new User
             {
-                UserId = "bfoote",
+                UserName = "bfoote",
                 Password = "maple"
             }));
             Assert.IsTrue(UserManager.Login(new User
             {
-                UserId = "kfrog",
+                UserName = "kfrog",
                 Password = "misspiggy"
             }));
         }
@@ -46,7 +46,7 @@ namespace CH.DVDCentral.BL.Test
                 Seed();
                 Assert.IsTrue(UserManager.Login(new User
                 {
-                    UserId = "",
+                    UserName = "",
                     Password = "maple"
                 }));
             }
@@ -68,7 +68,7 @@ namespace CH.DVDCentral.BL.Test
                 Seed();
                 Assert.IsTrue(UserManager.Login(new User
                 {
-                    UserId = "bfoote",
+                    UserName = "bfoote",
                     Password = "birch"
                 }));
             }
@@ -90,7 +90,7 @@ namespace CH.DVDCentral.BL.Test
                 Seed();
                 Assert.IsTrue(UserManager.Login(new User
                 {
-                    UserId = "BFOOTE",
+                    UserName = "BFOOTE",
                     Password = "maple"
                 }));
             }
@@ -112,7 +112,7 @@ namespace CH.DVDCentral.BL.Test
                 Seed();
                 Assert.IsTrue(UserManager.Login(new User
                 {
-                    UserId = "bfoote",
+                    UserName = "bfoote",
                     Password = ""
                 }));
             }
@@ -153,7 +153,7 @@ namespace CH.DVDCentral.BL.Test
             {
                 FirstName = "Test",
                 LastName = "Test",
-                UserId = "Test",
+                UserName = "Test",
                 Password = "Test"
 
 
