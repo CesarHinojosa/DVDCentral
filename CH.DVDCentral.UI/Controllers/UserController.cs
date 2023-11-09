@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CH.DVDCentral.UI.Extensions;
-
+using CH.DVDCentral.UI.Models;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace CH.DVDCentral.UI.Controllers
 {
@@ -8,7 +9,7 @@ namespace CH.DVDCentral.UI.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View(UserManager.Load());
         }
 
         private void SetUser(User user)
@@ -64,6 +65,69 @@ namespace CH.DVDCentral.UI.Controllers
             ViewBag.Title = "Logout";
             SetUser(null);
             return View();
+        }
+
+        public IActionResult Create()
+        {
+            ViewBag.Title = "Create a User";
+            if (Authenticate.IsAuthenticated(HttpContext))
+            {
+                return View();
+            }
+            else
+            {
+                //first is action result
+                //second is the controller
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Create(User user)
+        {
+            try
+            {
+                int result = UserManager.Insert(user);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public IActionResult Edit(int id)
+        {
+            ViewBag.Title = "Edit a User";
+            if (Authenticate.IsAuthenticated(HttpContext))
+            {
+                return View(UserManager.LoadById(id));
+            }
+            else
+            {
+                //first is action result
+                //second is the controller
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, User user, bool rollback = false)
+        {
+            try
+            {
+                int result = UserManager.Update(user, rollback);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(user);
+
+            }
         }
     }
 }

@@ -190,6 +190,124 @@ namespace CH.DVDCentral.BL
 
         }
 
+        public static List<User> Load()
+        {
+            try
+            {
+                List<User> list = new List<User>();
+
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    (from u in dc.tblUsers
+                     select new
+                     {
+                         u.Id,
+                         u.UserId,
+                         u.FirstName,
+                         u.LastName,
+                         u.Password
+                     })
+                     .ToList()
+                     .ForEach(user => list.Add(new User
+                     {
+                         Id = user.Id,
+                         UserId = user.UserId,
+                         FirstName = user.FirstName,
+                         LastName = user.LastName,
+                         Password = user.Password
+
+                     }));
+                }
+
+                return list;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static int Update(User user, bool rollback = false)
+        {
+            try
+            {
+                int results = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback)
+                    {
+                        transaction = dc.Database.BeginTransaction();
+                    }
+
+                    //Get the row that we are trying to Update
+                    tblUser entity = dc.tblUsers.FirstOrDefault(u => u.Id == user.Id);
+
+                    if (entity != null)
+                    {
+                       //entity.FirstName = user.FirstName;
+                        //entity.LastName = user.LastName;
+                        entity.UserId = user.UserId;
+                        entity.Password = user.Password;
+
+                        results = dc.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Row does not exist");
+                    }
+
+                    if (rollback)
+                    {
+                        transaction.Rollback();
+                    }
+
+                }
+                return results;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static User LoadById(int id)
+        {
+            try
+            {
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    tblUser entity = dc.tblUsers.FirstOrDefault(s => s.Id == id);
+
+                    if (entity != null)
+                    {
+                        return new User
+                        {
+                            Id = entity.Id,
+                            FirstName = entity.FirstName,
+                            LastName = entity.LastName,
+                            UserId = entity.UserId,
+                            Password = entity.Password,
+
+                        };
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
 
     }
 }
