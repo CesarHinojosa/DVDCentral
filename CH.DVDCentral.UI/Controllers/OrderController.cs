@@ -13,7 +13,11 @@ namespace CH.DVDCentral.UI.Controllers
 
         public IActionResult Details(int id)
         {
+
+
             return View(OrderManager.LoadById(id));
+
+
         }
 
         public IActionResult Create()
