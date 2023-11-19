@@ -17,7 +17,7 @@ namespace CH.DVDCentral.BL.Models
 
         [DisplayName("Last Name")]
         public string? LastName { get; set;}
-        [DisplayName("User Id")]
+        [DisplayName("User Name")]
         public string? UserName { get; set; }
         public string? Password { get; set; }
 

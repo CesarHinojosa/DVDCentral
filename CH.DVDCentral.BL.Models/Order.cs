@@ -13,6 +13,7 @@ namespace CH.DVDCentral.BL.Models
         [DisplayName("Customer Id")]
         public int CustomerId { get; set; }
 
+        [DisplayName("Order Items")]
         public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
         [DisplayName("Order Date")]

@@ -76,7 +76,9 @@
                                    
                                 }
 
-
+                                //I can do GetObject type of (User) because with the GetObject method in the Session Extensions class we 
+                                //never determined what "T" would be
+                                //string key = user
                                 if (HttpContextAccessor.HttpContext?.Session.GetObject<User>("user") != null)
                                 {
 
@@ -110,7 +112,7 @@
                     <!--Displays the list of the Genres -->
                     @await Component.InvokeAsync("Sidebar")
                 </div>
-                <!--Need to att eh all link for movie-->
+                
                 
 
             </div>

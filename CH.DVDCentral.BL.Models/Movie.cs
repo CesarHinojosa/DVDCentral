@@ -14,9 +14,9 @@ namespace CH.DVDCentral.BL.Models
         public string? Description { get; set; }
         [DisplayName("Type of Format")]
         public int FormatId { get; set; }
-        [DisplayName("Director")]
+        [DisplayName("Director Id")]
         public int DirectorId { get; set; }
-        [DisplayName("Rating")]
+        [DisplayName("Rating Id")]
         public int RatingId { get; set; }
 
         public double Cost { get; set; }

@@ -8,18 +8,13 @@
     <h4>Order</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
+       
+       @*  <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CustomerId)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CustomerId)
-        </dd>
+        </dd> *@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.OrderDate)
         </dt>
@@ -32,31 +27,26 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ShipDate)
         </dd>
-        <dt class = "col-sm-2">
+        @* <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.UserId)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UserId)
-        </dd>
+        </dd> *@
     </dl>
 
     <dl class="row">
 
         @foreach (var item in Model.OrderItems)
         {
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(modelItem => item.Id)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(modelItem => item.Id)
-            </dd>
+           
 
-            <dt class="col-sm-2">
+            @* <dt class="col-sm-2">
                 @Html.DisplayNameFor(modelItem => item.OrderId)
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(modelItem => item.OrderId)
-            </dd>
+            </dd> *@
 
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(modelItem => item.Quantity)
@@ -65,12 +55,12 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </dd>
 
-            <dt class="col-sm-2">
+           @*  <dt class="col-sm-2">
                 @Html.DisplayNameFor(modelItem => item.MovieId)
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(modelItem => item.MovieId)
-            </dd>
+            </dd> *@
 
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(modelItem => item.Cost)

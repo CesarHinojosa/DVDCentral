@@ -102,5 +102,28 @@ namespace CH.DVDCentral.UI.Controllers
             }
         }
 
+        public IActionResult Delete(int id)
+        {
+            ViewBag.Title = "Delete";
+            return View(MovieManager.LoadById(id));
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id, Movie movie, bool rollback = false)
+        {
+            try
+            {
+                int result = MovieManager.Delete(id, rollback);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(movie);
+
+            }
+        }
+
     }
 }

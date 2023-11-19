@@ -1,11 +1,8 @@
 ﻿@model IEnumerable<CH.DVDCentral.BL.Models.Customer>
 
 @{
-    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,18 +10,16 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
-            <th>
+          @*   <th>
                 @Html.DisplayNameFor(model => model.UserID)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.Address)
             </th>
@@ -49,18 +44,16 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
+          
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
-            <td>
+          @*   <td>
                 @Html.DisplayFor(modelItem => item.UserID)
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
             </td>

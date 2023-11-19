@@ -8,12 +8,15 @@ namespace CH.DVDCentral.UI.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Title = "List of Customers";
             return View(CustomerManager.Load());
         }
 
         public IActionResult Details(int id)
         {
-            return View(CustomerManager.LoadById(id));
+            var item = CustomerManager.LoadById(id);
+            ViewBag.Title = "Details for " + item.FirstName + " " + item.LastName;
+            return View(item);
         }
 
         public IActionResult Create()
@@ -86,6 +89,7 @@ namespace CH.DVDCentral.UI.Controllers
 
         public IActionResult Delete(int id)
         {
+            ViewBag.Title = "Delete";
             return View(CustomerManager.LoadById(id));
         }
 
