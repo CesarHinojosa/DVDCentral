@@ -1,0 +1,78 @@
+﻿@model CH.DVDCentral.UI.ViewModels.MovieVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row m-2">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <input hidden asp-for="Movie.Id" class="form-control" />
+
+
+            <div class="form-group">
+                <label asp-for="Movie.Title" class="control-label"></label>
+                <input asp-asp-for="Movie.Title" class="form-control" />
+                <span asp-asp-validation-for="Movie.Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Movie.Description" class="control-label"></label>
+                <input asp-asp-for="Movie.Description" class="form-control" />
+                <span asp-asp-validation-for="Movie.Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Movie.InStkQty" class="control-label"></label>
+                <input asp-asp-for="Movie.InStkQty" class="form-control" />
+                <span asp-asp-validation-for="Movie.InStkQty" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Movie.ImagePath" class="control-label"></label>
+                <input asp-asp-for="Movie.ImagePath" class="form-control" />
+                <span asp-asp-validation-for="Movie.ImagePath" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Movie.DirectorId" class="control-label"></label>
+                <select asp-for="Movie.DirectorId" class="form-control"
+                        asp-items="@(new SelectList(Model.DirectorList, "Id", "FullName"))"></select>
+                <span asp-validation-for="Movie.DirectorId" class="text-danger"></span>
+            </div>
+            <!--Has to be a list box for a genre description-->
+
+            <div class="form-group">
+                <label asp-for="Movie.RatingId" class="control-label"></label>
+                <select asp-for="Movie.RatingId" class="form-control"
+                        asp-items="@(new SelectList(Model.RatingList, "Id", "Description"))"></select>
+                <span asp-validation-for="Movie.RatingId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Movie.FormatId" class="control-label"></label>
+                <select asp-for="Movie.FormatId" class="form-control"
+                        asp-items="@(new SelectList(Model.FormatList, "Id", "Description"))"></select>
+                <span asp-validation-for="Movie.FormatId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Movie.Cost" class="control-label"></label>
+                <input asp-asp-for="Movie.Cost" class="form-control" />
+                <span asp-asp-validation-for="Movie.Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

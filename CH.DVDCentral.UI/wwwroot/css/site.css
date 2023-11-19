@@ -37,8 +37,22 @@ body {
     padding-right: 0px;
 }
 
-    .sidebar ul {
-        list-style-type: none;
-        padding-left: 5px;
-        padding-right: 0px;
-    }
+.sidebar ul {
+    list-style-type: none;
+    padding-left: 5px;
+    padding-right: 0px;
+}
+
+.bg-dark {
+    background: linear-gradient(90deg, rgba(173, 216, 230, 1) 0%, rgba(0, 0, 128, 1) 35%);
+}
+
+table th {
+    background-color: rgba(102, 51, 153, 1);
+    color: black;
+}
+
+
+.table tr:nth-child(even) {
+    background-color: rgba(147, 112, 219, 0.25);
+}

@@ -12,13 +12,18 @@ namespace CH.DVDCentral.BL.Models
         public int Id { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
+        [DisplayName("Type of Format")]
         public int FormatId { get; set; }
+        [DisplayName("Director")]
         public int DirectorId { get; set; }
+        [DisplayName("Rating")]
         public int RatingId { get; set; }
 
         public double Cost { get; set; }
         [DisplayName("Quantity")]
         public int InStkQty { get; set; }
+
+        [DisplayName("Image Path")]
         public string? ImagePath { get; set; }
         [DisplayName("Rating Description")]
         public string? RatingDescription { get; set; }
@@ -28,6 +33,8 @@ namespace CH.DVDCentral.BL.Models
 
         [DisplayName("Director Name")]
         public string? FullName { get; set; }
+
+        
 
     }
 }

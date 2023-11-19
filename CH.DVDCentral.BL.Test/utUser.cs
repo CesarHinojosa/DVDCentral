@@ -130,23 +130,7 @@ namespace CH.DVDCentral.BL.Test
         [TestMethod]
         public void Insert()
         {
-            //int id = 0;
-            //Customer customer = new Customer
-            //{
-            //    FirstName = "Test",
-            //    LastName = "Test",
-            //    UserID = 9,
-            //    Address = "Test",
-            //    City = "Test",
-            //    State = "WI", // Has to be only two characters 
-            //    Zip = "Test",
-            //    Phone = "Test",
-            //    ImagePath = "Test"
-
-
-            //};
-            //int results = CustomerManager.Insert(customer, true);
-            //Assert.AreEqual(1, results);
+            
 
             int id = 0;
             User user = new User
