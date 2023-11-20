@@ -1,11 +1,8 @@
 ﻿@model IEnumerable<CH.DVDCentral.BL.Models.Movie>
 
 @{
-    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,6 +10,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th></th>
            
             <th>
                 @Html.DisplayNameFor(model => model.Title)
@@ -53,7 +51,15 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-           
+
+            <td>
+                <img src="~images/@item.ImagePath"
+                    id="movieimage"
+                    alt="@item.Description"
+                    onclick="on('/images/@item.ImagePath')"
+                    class="imagepropsmall" />
+            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
