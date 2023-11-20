@@ -13,6 +13,14 @@ namespace CH.DVDCentral.UI.Controllers
             return View(MovieManager.Load());
         }
 
+        public IActionResult Details(int id)
+        {
+            ViewBag.Title = "Details";
+            return View(MovieManager.LoadById(id));
+
+
+        }
+
         public IActionResult Browse(int id) 
         {
             return View(nameof(Index), MovieManager.Load(id));

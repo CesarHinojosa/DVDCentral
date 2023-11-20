@@ -87,13 +87,13 @@
                                 if (HttpContextAccessor.HttpContext?.Session.GetObject<User>("user") != null)
                                 {
 
-                                    <a asp-controller="User"
-                                       asp-action="Logout">Logout </a>
+                                                <a asp-controller="User"
+                                                   asp-action="Logout">Logout </a>
                                 }
                                 else
                                 {
-                                    <a asp-controller="User"
-                                       asp-action="Login">Login </a>
+                                                <a asp-controller="User"
+                                                   asp-action="Login">Login </a>
                                 }
                               
                             }
@@ -119,6 +119,14 @@
                 </div>
                 
                 
+
+            </div>
+
+            <div id="overlay" onclick="off()">
+                <div id="imageproplarge">
+                    <img class="imageproplarge" id="output" />
+
+                </div>
 
             </div>
 
@@ -149,23 +157,26 @@
 </body>
 </html>
 
+
+
 <script type="text/javascript">
 
-    function off() {
+    function off() { 
         console.log('Off');
-
         document.getElementById("overlay").style.display = "none";
     }
 
-    function on(picture) {
+    function on(picture) { 
         console.log('On');
 
         document.getElementById("overlay").style.display = "block";
         document.getElementById("output").src = picture;
-
     }
 
 </script>
+
+
+
 
 
 

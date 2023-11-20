@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<CH.DVDCentral.BL.Models.OrderItem>
 
 @{
-    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -26,7 +24,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Cost)
             </th>
-            <th></th>
+            @* <th></th> *@
         </tr>
     </thead>
     <tbody>
@@ -45,11 +43,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Cost)
             </td>
-            <td>
+           @*  <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id  }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id  })
-            </td>
+            </td> *@
         </tr>
 }
     </tbody>
