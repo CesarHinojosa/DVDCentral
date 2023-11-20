@@ -14,9 +14,7 @@
     <thead>
         <tr>
            
-          @*   <th>
-                @Html.DisplayNameFor(model => model.CustomerId)
-            </th> *@
+          
             <th>
                 @Html.DisplayNameFor(model => model.OrderDate)
             </th>
@@ -26,6 +24,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.UserId)
             </th>
+
             <th></th>
         </tr>
     </thead>
@@ -33,9 +32,7 @@
 @foreach (var item in Model) {
         <tr>
            
-           @*  <td>
-                @Html.DisplayFor(modelItem => item.CustomerId)
-            </td> *@
+           
             <td>
                 @Html.DisplayFor(modelItem => item.OrderDate)
             </td>
@@ -54,3 +51,15 @@
 }
     </tbody>
 </table>
+
+
+  @*   <div>
+        <partial name="_OrderItemsPartial" model="Model.OrderItems" />
+    </div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    } *@
+

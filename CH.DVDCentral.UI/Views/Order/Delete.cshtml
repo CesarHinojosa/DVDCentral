@@ -35,45 +35,20 @@
         </dd> *@
     </dl>
 
-    <dl class="row">
+    <div>
+        <partial name="_OrderItemsPartial" model="Model.OrderItems" />
+    </div>
 
-        @foreach (var item in Model.OrderItems)
-        {
-           
-
-            @* <dt class="col-sm-2">
-                @Html.DisplayNameFor(modelItem => item.OrderId)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(modelItem => item.OrderId)
-            </dd> *@
-
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(modelItem => item.Quantity)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </dd>
-
-           @*  <dt class="col-sm-2">
-                @Html.DisplayNameFor(modelItem => item.MovieId)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(modelItem => item.MovieId)
-            </dd> *@
-
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(modelItem => item.Cost)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(modelItem => item.Cost)
-            </dd>
-
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
-    </dl>
-    
+    }
+
     <form asp-action="Delete">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+
+

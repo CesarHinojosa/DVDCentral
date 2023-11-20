@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CH.DVDCentral.UI.styles.css" asp-append-version="true" />
+
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -143,3 +148,27 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<script type="text/javascript">
+
+    function off() {
+        console.log('Off');
+
+        document.getElementById("overlay").style.display = "none";
+    }
+
+    function on(picture) {
+        console.log('On');
+
+        document.getElementById("overlay").style.display = "block";
+        document.getElementById("output").src = picture;
+
+    }
+
+</script>
+
+
+
+
+
+

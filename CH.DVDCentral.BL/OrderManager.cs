@@ -252,6 +252,7 @@ namespace CH.DVDCentral.BL
                          d.UserId,
                          d.OrderDate,
                          d.ShipDate,
+                         //Something has to be here to link the OrderItems 
                          
 
                      })

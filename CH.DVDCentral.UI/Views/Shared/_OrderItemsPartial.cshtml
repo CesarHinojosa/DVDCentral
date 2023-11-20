@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<CH.DVDCentral.BL.Models.OrderItem>
 
-<table id="orderItems" class="table data-table">
+<table id="items" class="table data-table">
     <thead>
         <tr>
 
@@ -34,12 +34,12 @@
     </tbody>
 </table>
 
-
+<p>
 <script type="text/javascript" class="init">
 
     $.noConflict();
     jQuery(document).ready(function ($) {
-        $('#students').DataTable({
+        $('#items').DataTable({
             "lengthMenu": [[5, 10, 25, 30, -1], [5, 10, 25, 30, "All"]]
         });
 
@@ -47,3 +47,4 @@
 
 
 </script>
+</p>
