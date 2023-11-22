@@ -103,3 +103,11 @@ table th {
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%)
 }
+
+
+.card-img {
+    height: 200px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

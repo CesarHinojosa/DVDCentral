@@ -12,6 +12,20 @@
 
         public List<Format> FormatList { get; set; } = new List<Format>();
 
-        
+        public IFormFile File { get; set; }
+
+        public IEnumerable<int> GenreIds { get; set; } 
+
+        public MovieVM()
+        {
+            GenreList = GenreManager.Load();
+
+        }
+
+        //public MovieVM(int id)
+        //{
+        //    GenreList = GenreManager.Load();
+            
+        //}
     }
 }

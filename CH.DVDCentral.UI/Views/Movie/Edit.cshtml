@@ -7,7 +7,7 @@
 
 <div class="row m-2">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             
                 
@@ -30,12 +30,6 @@
                 <label asp-for="Movie.InStkQty" class="control-label"></label>
                 <input asp-asp-for="Movie.InStkQty" class="form-control" />
                 <span asp-asp-validation-for="Movie.InStkQty" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Movie.ImagePath" class="control-label"></label>
-                <input asp-asp-for="Movie.ImagePath" class="form-control" />
-                <span asp-asp-validation-for="Movie.ImagePath" class="text-danger"></span>
             </div>
 
             <div class="form-group">
@@ -66,7 +60,21 @@
                 <input asp-asp-for="Movie.Cost" class="form-control" />
                 <span asp-asp-validation-for="Movie.Cost" class="text-danger"></span>
             </div>
-            
+
+            <div class="form-group"
+            <label asp-for="Movie.ImagePath" class="control-label"></label>
+
+            <img class="imageproplarge"
+                 alt="@Model.Movie.Description"
+                 id="movieimage"
+                 onclick="on('/images/@Model.Movie.ImagePath')" 
+                 src="~/images/@Model.Movie.ImagePath"/>
+            <input asp-for="Movie.ImagePath" class="form-control" />
+
+            <input type="file" name="File" id="File" accept="image/" onchange="loadFile(event)" />
+
+            <span asp-validation-for="Movie.ImagePath" class="text-danger"></span>
+
             <div class="form-group">
                 <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
@@ -77,4 +85,14 @@
 <div class="m-2">
     <a asp-action="Index">Back to List</a>
 </div>
+
+
+<script>
+    var loadfile = function (event) {
+        var output = document.getElementById('programimage');
+        //whenever you see square brackets it is an array
+        output.src = URL.createObjectURL(event.target.files[0]);
+    }
+
+</script>
 
