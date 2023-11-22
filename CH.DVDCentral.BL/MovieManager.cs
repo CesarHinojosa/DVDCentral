@@ -133,6 +133,7 @@ namespace CH.DVDCentral.BL
                         entity.Cost = movie.Cost;
                         entity.InStkQty = movie.InStkQty;
                         entity.ImagePath = movie.ImagePath;
+                       
 
                         results = dc.SaveChanges();
                     }
@@ -265,10 +266,12 @@ namespace CH.DVDCentral.BL
                          m.InStkQty,
                          m.ImagePath,
                          RatingDescription = r.Description,
+                         //RatingDescription = r.Description,
                          FormatDescription = f.Description,
                          FullName = d.FirstName + " " + d.LastName,
 
                      })
+                     .Distinct()
                      .ToList()
                      .ForEach(movie => list.Add(new Movie
                      {

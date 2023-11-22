@@ -22,10 +22,17 @@
 
         }
 
-        //public MovieVM(int id)
-        //{
-        //    GenreList = GenreManager.Load();
+        public MovieVM(int id)
+        {
+            GenreList = GenreManager.Load();
+            Movie = MovieManager.LoadById(id);
+
+
+            //The Genre is from the movie model
+            GenreIds = Movie.Genre.Select(a => a.Id);
+
             
-        //}
+
+        }
     }
 }

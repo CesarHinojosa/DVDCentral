@@ -13,7 +13,7 @@ namespace CH.DVDCentral.BL
     {
 
 
-        public static int Insert(int movieId, int genreId, bool rollback = false)
+        public static void Insert(int movieId, int genreId, bool rollback = false)
         {
 
             try
@@ -22,36 +22,14 @@ namespace CH.DVDCentral.BL
 
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    IDbContextTransaction transaction = null;
-                    if (rollback)
-                    {
-                        transaction = dc.Database.BeginTransaction();
-                    }
-                    tblMovieGenre entity = new tblMovieGenre();
-                    //turnary operator 
-                    //s is a represenation of a student 
-                    // dc.tblStudents.Any()  yes or no if it is false then you do 1;
-                    //dc.tblStudents.Any()  yes or no if it is true it does this ? dc.tblStudents.Max(s => s.Id) + 1
-                    entity.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(d => d.Id) + 1 : 1;
-                    entity.GenreId = genreId;
-                    entity.MovieId = movieId;
+                    tblMovieGenre tblMovieGenre = new tblMovieGenre();
+                    tblMovieGenre.MovieId = movieId;
+                    tblMovieGenre.GenreId = genreId;
+                    tblMovieGenre.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(mg => mg.Id) + 1 : 1;
 
-
-                    // IMPORTANT - BACK FILL THE ID 
-                    //YOU CAN'T PASS AN OBJECT BY VALUE 
-                    //IT IS BY REFERENCE 
-                    //movieGenre.Id = entity.Id;
-
-                    dc.tblMovieGenres.Add(entity);
-                    results = dc.SaveChanges();
-
-                    if (rollback)
-                    {
-                        transaction.Rollback();
-                    }
-
+                    dc.tblMovieGenres.Add(tblMovieGenre);
+                    dc.SaveChanges();
                 }
-                return results;
             }
             catch (Exception)
             {
@@ -60,157 +38,75 @@ namespace CH.DVDCentral.BL
             }
         }
 
-        public static int Update(int movieId, int genreId, int id, bool rollback = false)
-        {
-            try
-            {
-                int results = 0;
-                using (DVDCentralEntities dc = new DVDCentralEntities())
-                {
-                    IDbContextTransaction transaction = null;
-                    if (rollback)
-                    {
-                        transaction = dc.Database.BeginTransaction();
-                    }
-
-                    //Get the row that we are trying to Update
-                    tblMovieGenre entity = dc.tblMovieGenres.FirstOrDefault(d => d.Id == id);
-
-                    if (entity != null)
-                    {
-                        entity.MovieId = movieId;
-                        entity.GenreId = genreId;
-                        results = dc.SaveChanges();
-                    }
-                    else
-                    {
-                        throw new Exception("Row does not exist");
-                    }
-
-                    if (rollback)
-                    {
-                        transaction.Rollback();
-                    }
-
-                }
-                return results;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public static int Delete(int id, bool rollback = false)
-        {
-            try
-            {
-                int results = 0;
-                using (DVDCentralEntities dc = new DVDCentralEntities())
-                {
-                    IDbContextTransaction transaction = null;
-                    if (rollback)
-                    {
-                        transaction = dc.Database.BeginTransaction();
-                    }
-
-                    //Gets the ID 
-                    tblMovieGenre entity = dc.tblMovieGenres.FirstOrDefault(d => d.Id == id);
-
-                    if (entity != null)
-                    {
-                        //Removes the student with the selected ID
-                        dc.tblMovieGenres.Remove(entity);
-                        results = dc.SaveChanges();
-
-                    }
-                    else
-                    {
-                        throw new Exception("Row does not exist");
-                    }
-
-                    if (rollback)
-                    {
-                        transaction.Rollback();
-                    }
-
-                }
-                return results;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        //public static MovieGenre LoadById(int id)
+        //works but only for one genre
+        //public static void Update(int movieId, int genreId, bool rollback = false)
         //{
+
         //    try
         //    {
+        //        int results = 0;
+
         //        using (DVDCentralEntities dc = new DVDCentralEntities())
         //        {
-        //            tblMovieGenre entity = dc.tblMovieGenres.FirstOrDefault(s => s.Id == id);
-
-        //            if (entity != null)
+        //            IDbContextTransaction transaction = null;
+        //            if (rollback)
         //            {
-        //                return new MovieGenre
-        //                {
-        //                    Id = entity.Id,
-        //                    FirstName = entity.FirstName,
-        //                    LastName = entity.LastName,
+        //                transaction = dc.Database.BeginTransaction();
+        //            }
 
-        //                };
+        //            tblMovieGenre entity = dc.tblMovieGenres.FirstOrDefault(s => s.Id == movieId);
+        //            if(entity != null)
+        //            {
+        //                entity.MovieId = movieId;
+        //                entity.GenreId= genreId;
+        //                results = dc.SaveChanges();
         //            }
         //            else
         //            {
-        //                throw new Exception();
+        //                throw new Exception("Row does not exist");
         //            }
-        //        }
 
+        //            if (rollback)
+        //            {
+        //                transaction.Rollback();
+        //            }
+
+        //        }
         //    }
         //    catch (Exception)
         //    {
 
         //        throw;
         //    }
-
         //}
 
 
-        //public static List<MovieGenre> Load()
-        //{
-        //    try
-        //    {
-        //        List<MovieGenre> list = new List<MovieGenre>();
+        public static void Delete(int movieid, int genreid, bool rollback = false)
+        {
+            try
+            {
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    tblMovieGenre? tblMovieGenre = dc.tblMovieGenres
+                                                    .FirstOrDefault(mg => mg.MovieId == movieid
+                                                    && mg.GenreId == genreid);
 
-        //        using (DVDCentralEntities dc = new DVDCentralEntities())
-        //        {
-        //            (from d in dc.tblMovieGenres
-        //             select new
-        //             {
-        //                 d.Id,
-        //                 d.FirstName,
-        //                 d.LastName
-        //             })
-        //             .ToList()
-        //             .ForEach(movieGenre => list.Add(new MovieGenre
-        //             {
-        //                 Id = movieGenre.Id,
-        //                 FirstName = movieGenre.FirstName,
-        //                 LastName = movieGenre.LastName
+                    if (tblMovieGenre != null)
+                    {
+                        dc.tblMovieGenres.Remove(tblMovieGenre);
+                        dc.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception)
+            {
 
-        //             }));
-        //        }
+                throw;
+            }
 
-        //        return list;
-        //    }
-        //    catch (Exception)
-        //    {
 
-        //        throw;
-        //    }
+        }
+
         
     }
 }

@@ -18,5 +18,6 @@ namespace CH.DVDCentral.BL.Models
         public int MovieId { get; set; }
         public float Cost { get; set; }
 
+       
     }
 }

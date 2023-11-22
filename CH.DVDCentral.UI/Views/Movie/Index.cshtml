@@ -20,8 +20,12 @@
                 </div>
 
                 <div class="card-body">
-                    <div class="card-img" style="background-image: url('@item.ImagePath');">
+
+                    <div class="card-img" style="background-image: url('@Url.Content("~/images/" + item.ImagePath)');">
                     </div>
+                    
+                   @*  <div class="card-img" style="background-image: src="~/images/@Model.Movie.ImagePath" /> "> *@
+                    
 
                     <h5>@Html.DisplayFor(ModelItem => item.FormatDescription)</h5>
                     <h5>@Html.DisplayFor(ModelItem => item.RatingDescription)</h5>

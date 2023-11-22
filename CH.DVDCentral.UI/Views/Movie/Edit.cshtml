@@ -16,20 +16,20 @@
            
             <div class="form-group">
                 <label asp-for="Movie.Title" class="control-label"></label>
-                <input asp-asp-for="Movie.Title" class="form-control" />
-                <span asp-asp-validation-for="Movie.Title" class="text-danger"></span>
+                <input asp-for="Movie.Title" class="form-control" />
+                <span asp-validation-for="Movie.Title" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Movie.Description" class="control-label"></label>
-                <input asp-asp-for="Movie.Description" class="form-control" />
-                <span asp-asp-validation-for="Movie.Description" class="text-danger"></span>
+                <input asp-for="Movie.Description" class="form-control" />
+                <span asp-validation-for="Movie.Description" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Movie.InStkQty" class="control-label"></label>
-                <input asp-asp-for="Movie.InStkQty" class="form-control" />
-                <span asp-asp-validation-for="Movie.InStkQty" class="text-danger"></span>
+                <input asp-for="Movie.InStkQty" class="form-control" />
+                <span asp-validation-for="Movie.InStkQty" class="text-danger"></span>
             </div>
 
             <div class="form-group">
@@ -39,26 +39,43 @@
                     asp-items="@(new SelectList(Model.DirectorList, "Id", "FullName"))"></select>
                     <span asp-validation-for="Movie.DirectorId" class="text-danger"></span>
             </div>
+
+
             <!--Has to be a list box for a genre description-->
+             <div class="form-group">
+                <label asp-for="Movie.Genre" class="control-label"></label>
+                <select 
+                    asp-for="GenreIds"
+                    class="form-control"
+                    multiple
+                    asp-items="@(new MultiSelectList(Model.GenreList, "Id", "Description"))">
+                </select>
+
+                <span asp-validation-for="Movie.Genre" class="text-danger"></span>
+
+            </div> 
+
+
+            
 
             <div class="form-group">
-                <label asp-for="Movie.RatingId" class="control-label"></label>
+                <label asp-for="Movie.RatingDescription" class="control-label"></label>
                 <select asp-for="Movie.RatingId" class="form-control"
                         asp-items="@(new SelectList(Model.RatingList, "Id", "Description"))"></select>
                 <span asp-validation-for="Movie.RatingId" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Movie.FormatId" class="control-label"></label>
+                <label asp-for="Movie.FormatDescription" class="control-label"></label>
                 <select asp-for="Movie.FormatId" class="form-control"
                         asp-items="@(new SelectList(Model.FormatList, "Id", "Description"))"></select>
                 <span asp-validation-for="Movie.FormatId" class="text-danger"></span>
-            </div>
+            </div> 
 
             <div class="form-group">
                 <label asp-for="Movie.Cost" class="control-label"></label>
-                <input asp-asp-for="Movie.Cost" class="form-control" />
-                <span asp-asp-validation-for="Movie.Cost" class="text-danger"></span>
+                <input asp-for="Movie.Cost" class="form-control" />
+                <span asp-validation-for="Movie.Cost" class="text-danger"></span>
             </div>
 
             <div class="form-group"
