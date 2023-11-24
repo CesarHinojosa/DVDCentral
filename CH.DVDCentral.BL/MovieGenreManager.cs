@@ -23,10 +23,12 @@ namespace CH.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     tblMovieGenre tblMovieGenre = new tblMovieGenre();
-                    tblMovieGenre.GenreId = genreId;
                     tblMovieGenre.MovieId = movieId;
+                    tblMovieGenre.GenreId = genreId;
+                   
                    
                     tblMovieGenre.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(mg => mg.Id) + 1 : 1;
+                    
 
                     dc.tblMovieGenres.Add(tblMovieGenre);
                     dc.SaveChanges();

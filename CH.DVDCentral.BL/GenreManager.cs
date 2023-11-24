@@ -246,7 +246,7 @@ namespace CH.DVDCentral.BL
                 {
                     (from g in dc.tblGenres
                      join mg in dc.tblMovieGenres on g.Id equals mg.GenreId
-                     where mg.Id == movieId
+                     where mg.MovieId == movieId
                      select new
                      {
                          g.Id,

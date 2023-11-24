@@ -62,6 +62,10 @@ namespace CH.DVDCentral.UI.Controllers
         {
             try
             {
+
+                IEnumerable<int> oldGenreIds = new List<int>();
+                oldGenreIds = GetObject();
+
                 //Image stuff
                 if (movieVM.File != null)
                 {
@@ -84,8 +88,7 @@ namespace CH.DVDCentral.UI.Controllers
                     newGenreIds = movieVM.GenreIds;
                 }
 
-                IEnumerable<int> oldGenreIds = new List<int>();
-                oldGenreIds = GetObject();
+               
 
                 IEnumerable<int> deletes = oldGenreIds.Except(newGenreIds);
                 IEnumerable<int> adds = newGenreIds.Except(oldGenreIds);
@@ -135,7 +138,7 @@ namespace CH.DVDCentral.UI.Controllers
 
             if (Authenticate.IsAuthenticated(HttpContext))
             {
-                HttpContext.Session.SetObject("genreids", new List<int>());
+               
                 return View(movieVM);
             }
             else
@@ -164,11 +167,24 @@ namespace CH.DVDCentral.UI.Controllers
                     }
                 }
 
-                List<int> selectedGenreIds = HttpContext.Session.GetObject<List<int>>("genreids");
-                movieVM.GenreIds = selectedGenreIds;
+                IEnumerable<int> newGenreIds = new List<int>();
 
+                newGenreIds = movieVM.GenreIds;
+
+                HttpContext.Session.SetObject("genreids", movieVM.GenreIds);
+                IEnumerable<int> adds = newGenreIds;
+
+                newGenreIds = GetObject();
+
+                adds.ToList().ForEach(a =>  MovieGenreManager.Insert(id, a));
+
+               
 
                 int result = MovieManager.Insert(movieVM.Movie);
+
+              
+
+
 
                 return RedirectToAction(nameof(Index));
             }
