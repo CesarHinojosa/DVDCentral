@@ -126,14 +126,15 @@ namespace CH.DVDCentral.UI.Controllers
         {
             ViewBag.Title = "Create a Movie";
             MovieVM movieVM = new MovieVM();
-
             movieVM.Movie = new BL.Models.Movie();
+
             movieVM.FormatList = FormatManager.Load();
             movieVM.DirectorList = DirectorManager.Load();
             movieVM.RatingList = RatingManager.Load();
             movieVM.GenreList = GenreManager.Load();
-
-
+            
+           
+           
            
 
             if (Authenticate.IsAuthenticated(HttpContext))
@@ -154,7 +155,7 @@ namespace CH.DVDCentral.UI.Controllers
         {
             try
             {
-
+                movieVM.Movie.Id = id;
                 if (movieVM.File != null)
                 {
                     movieVM.Movie.ImagePath = movieVM.File.FileName;
@@ -176,13 +177,13 @@ namespace CH.DVDCentral.UI.Controllers
 
                 newGenreIds = GetObject();
 
-                adds.ToList().ForEach(a =>  MovieGenreManager.Insert(id, a));
-
                
 
-                int result = MovieManager.Insert(movieVM.Movie);
+                //Inserts into tblMovieGenre
+                adds.ToList().ForEach(a =>  MovieGenreManager.Insert(id, a));
 
-              
+                //Inserts into tblMovie
+                int result = MovieManager.Insert(movieVM.Movie);
 
 
 

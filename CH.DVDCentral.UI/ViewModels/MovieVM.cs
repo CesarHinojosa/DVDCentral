@@ -7,9 +7,7 @@ namespace CH.DVDCentral.UI.ViewModels
 
         
         public Movie Movie { get; set; }
-
         
-       
         public List<Director> DirectorList { get; set; } = new List<Director>();
 
         public List<Rating> RatingList { get; set; } = new List<Rating>();

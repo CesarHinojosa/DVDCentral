@@ -18,7 +18,7 @@ namespace CH.DVDCentral.BL
 
             try
             {
-                int results = 0;
+              
 
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {

@@ -272,7 +272,6 @@ namespace CH.DVDCentral.BL
                          m.ImagePath,
                          RatingDescription = r.Description,
                          FormatDescription = f.Description,
-                         //GenreDescription = mg.
                          FullName = d.FirstName + " " + d.LastName,
 
                      })
