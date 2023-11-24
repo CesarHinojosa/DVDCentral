@@ -42,18 +42,11 @@ namespace CH.DVDCentral.UI.Controllers
         {
           
             MovieVM movieVM = new MovieVM(id);
-            movieVM.FormatList = FormatManager.Load();
-            movieVM.DirectorList = DirectorManager.Load();
-            movieVM.RatingList = RatingManager.Load();
-            movieVM.GenreList = GenreManager.Load();
-
-
-
             ViewBag.Title = "Edit " + movieVM.Movie.Title;
+            HttpContext.Session.SetObject("genreids", movieVM.GenreIds);
 
             if (Authenticate.IsAuthenticated(HttpContext))
             {
-                HttpContext.Session.SetObject("genreids", movieVM.GenreIds);
                 return View(movieVM);
             }
             else
@@ -65,11 +58,11 @@ namespace CH.DVDCentral.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, MovieVM movieVM, bool rollback = false)
+        public IActionResult Edit(int id, MovieVM movieVM)
         {
             try
             {
-
+                //Image stuff
                 if (movieVM.File != null)
                 {
                     movieVM.Movie.ImagePath = movieVM.File.FileName;
@@ -81,6 +74,8 @@ namespace CH.DVDCentral.UI.Controllers
                         ViewBag.Message = "File Uploaded Successfully...";
                     }
                 }
+
+
 
                 //Comparison stuff with the IDs
                 IEnumerable<int> newGenreIds = new List<int>();
@@ -97,11 +92,9 @@ namespace CH.DVDCentral.UI.Controllers
 
                 deletes.ToList().ForEach(d => MovieGenreManager.Delete(id, d));
                 adds.ToList().ForEach(a => MovieGenreManager.Insert(id, a));
-                //adds.ToList().ForEach(a => MovieGenreManager.Update(id, a));
+              
 
-                //HttpContext.Session.SetObject("genreids", movieVM.GenreIds);
-
-                int result = MovieManager.Update(movieVM.Movie, rollback);
+                int result = MovieManager.Update(movieVM.Movie);
 
                 return RedirectToAction(nameof(Index));
             }

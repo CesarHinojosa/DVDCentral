@@ -35,7 +35,8 @@ namespace CH.DVDCentral.BL
                     RatingId = ratingId,
                     Cost = cost,
                     InStkQty = InStkQty,
-                    ImagePath = imagepath
+                    ImagePath = imagepath,
+                    
 
                 };
 
@@ -134,6 +135,9 @@ namespace CH.DVDCentral.BL
                         entity.InStkQty = movie.InStkQty;
                         entity.ImagePath = movie.ImagePath;
                        
+                        
+                        
+                       
 
                         results = dc.SaveChanges();
                     }
@@ -218,9 +222,10 @@ namespace CH.DVDCentral.BL
                             FormatId = entity.FormatId,
                             DirectorId = entity.DirectorId,
                             RatingId = entity.RatingId,
-                            Cost = entity.Cost, 
-                            InStkQty = entity.InStkQty, 
+                            Cost = entity.Cost,
+                            InStkQty = entity.InStkQty,
                             ImagePath = entity.ImagePath,
+                            Genre = GenreManager.Load(id)
                         };
                     }
                     else
@@ -238,7 +243,7 @@ namespace CH.DVDCentral.BL
 
         }
 
-        public static List<Movie> Load(int? genreId = null )
+        public static List<Movie> Load(int? genreId = null)
         {
             try
             {
@@ -266,8 +271,8 @@ namespace CH.DVDCentral.BL
                          m.InStkQty,
                          m.ImagePath,
                          RatingDescription = r.Description,
-                         //RatingDescription = r.Description,
                          FormatDescription = f.Description,
+                         //GenreDescription = mg.
                          FullName = d.FirstName + " " + d.LastName,
 
                      })
