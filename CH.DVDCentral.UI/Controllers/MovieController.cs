@@ -58,7 +58,7 @@ namespace CH.DVDCentral.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, MovieVM movieVM)
+        public IActionResult Edit(int id, MovieVM movieVM, bool rollback = false)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace CH.DVDCentral.UI.Controllers
                 adds.ToList().ForEach(a => MovieGenreManager.Insert(id, a));
               
 
-                int result = MovieManager.Update(movieVM.Movie);
+                int result = MovieManager.Update(movieVM.Movie, rollback);
 
                 return RedirectToAction(nameof(Index));
             }

@@ -43,7 +43,7 @@
 
             <!--Has to be a list box for a genre description-->
              <div class="form-group">
-                <label asp-for="Movie.Genre" class="control-label"></label>
+                <label asp-for="Movie.Genres" class="control-label"></label>
                 <select 
                     asp-for="GenreIds"
                     class="form-control"
@@ -51,7 +51,7 @@
                     asp-items="@(new MultiSelectList(Model.GenreList, "Id", "Description"))">
                 </select>
 
-                <span asp-validation-for="Movie.Genre" class="text-danger"></span>
+                <span asp-validation-for="Movie.Genres" class="text-danger"></span>
 
             </div> 
 

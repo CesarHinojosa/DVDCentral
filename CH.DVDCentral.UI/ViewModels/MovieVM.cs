@@ -8,14 +8,15 @@ namespace CH.DVDCentral.UI.ViewModels
         
         public Movie Movie { get; set; }
 
-        public List<Genre> GenreList { get; set; } = new List<Genre>();
-
+        
+       
         public List<Director> DirectorList { get; set; } = new List<Director>();
 
         public List<Rating> RatingList { get; set; } = new List<Rating>();
 
         public List<Format> FormatList { get; set; } = new List<Format>();
 
+        public List<Genre> GenreList { get; set; } = new List<Genre>();
 
         //For the image
         public IFormFile File { get; set; }
@@ -34,12 +35,14 @@ namespace CH.DVDCentral.UI.ViewModels
             Movie = MovieManager.LoadById(id);
 
             GenreList = GenreManager.Load();
+
+
             DirectorList = DirectorManager.Load();
             RatingList = RatingManager.Load();
             FormatList = FormatManager.Load();
 
-            //The Genre is from the movie model
-            GenreIds = Movie.Genre.Select(a => a.Id);
+            
+            GenreIds = Movie.Genres.Select(a => a.Id);
         }
     }
 }

@@ -23,8 +23,9 @@ namespace CH.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     tblMovieGenre tblMovieGenre = new tblMovieGenre();
-                    tblMovieGenre.MovieId = movieId;
                     tblMovieGenre.GenreId = genreId;
+                    tblMovieGenre.MovieId = movieId;
+                   
                     tblMovieGenre.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(mg => mg.Id) + 1 : 1;
 
                     dc.tblMovieGenres.Add(tblMovieGenre);
@@ -38,47 +39,6 @@ namespace CH.DVDCentral.BL
             }
         }
 
-        //works but only for one genre
-        //public static void Update(int movieId, int genreId, bool rollback = false)
-        //{
-
-        //    try
-        //    {
-        //        int results = 0;
-
-        //        using (DVDCentralEntities dc = new DVDCentralEntities())
-        //        {
-        //            IDbContextTransaction transaction = null;
-        //            if (rollback)
-        //            {
-        //                transaction = dc.Database.BeginTransaction();
-        //            }
-
-        //            tblMovieGenre entity = dc.tblMovieGenres.FirstOrDefault(s => s.Id == movieId);
-        //            if(entity != null)
-        //            {
-        //                entity.MovieId = movieId;
-        //                entity.GenreId= genreId;
-        //                results = dc.SaveChanges();
-        //            }
-        //            else
-        //            {
-        //                throw new Exception("Row does not exist");
-        //            }
-
-        //            if (rollback)
-        //            {
-        //                transaction.Rollback();
-        //            }
-
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
 
 
         public static void Delete(int movieid, int genreid, bool rollback = false)

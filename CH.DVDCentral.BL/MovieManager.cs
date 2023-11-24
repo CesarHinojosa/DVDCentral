@@ -225,7 +225,7 @@ namespace CH.DVDCentral.BL
                             Cost = entity.Cost,
                             InStkQty = entity.InStkQty,
                             ImagePath = entity.ImagePath,
-                            Genre = GenreManager.Load(id)
+                            Genres = GenreManager.Load(id)
                         };
                     }
                     else

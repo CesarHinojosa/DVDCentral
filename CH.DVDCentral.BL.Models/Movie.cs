@@ -36,7 +36,7 @@ namespace CH.DVDCentral.BL.Models
         public string? FullName { get; set; }
 
 
-        public List<Genre> Genre { get ; set; } = new List<Genre>();
+        public List<Genre> Genres { get ; set; } = new List<Genre>();
         
 
     }
