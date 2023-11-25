@@ -81,7 +81,7 @@
             <div class="form-group"
             <label asp-for="Movie.ImagePath" class="control-label"></label>
 
-            <img class="imageproplarge"
+            <img class="imageproplarge m-2"
                  alt="@Model.Movie.Description"
                  id="movieimage"
                  onclick="on('/images/@Model.Movie.ImagePath')" 
@@ -106,7 +106,7 @@
 
 <script>
     var loadfile = function (event) {
-        var output = document.getElementById('programimage');
+        var output = document.getElementById('movieimage');
         //whenever you see square brackets it is an array
         output.src = URL.createObjectURL(event.target.files[0]);
     }
