@@ -86,7 +86,7 @@
                                 //string key = user
                                 if (HttpContextAccessor.HttpContext?.Session.GetObject<User>("user") != null)
                                 {
-
+                                    <a style="display: inline-block" class="nav-link text-light">@fullname </a>
                                                 <a asp-controller="User"
                                                    asp-action="Logout">Logout </a>
                                 }
@@ -97,7 +97,7 @@
                                 }
                               
                             }
-                            <a class="nav-link text-light">@fullname
+                           
                             </a>
                         </li>
                     </ul>
