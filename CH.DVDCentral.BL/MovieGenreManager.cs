@@ -25,8 +25,9 @@ namespace CH.DVDCentral.BL
                     tblMovieGenre tblMovieGenre = new tblMovieGenre();
                     tblMovieGenre.MovieId = movieId;
                     tblMovieGenre.GenreId = genreId;
-                   
-                   
+
+
+
                     tblMovieGenre.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(mg => mg.Id) + 1 : 1;
                     
 

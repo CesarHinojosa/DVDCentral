@@ -177,13 +177,16 @@ namespace CH.DVDCentral.UI.Controllers
 
                 newGenreIds = GetObject();
 
-               
-
-                //Inserts into tblMovieGenre
-                adds.ToList().ForEach(a =>  MovieGenreManager.Insert(id, a));
+                //int movieId = movieVM.
 
                 //Inserts into tblMovie
                 int result = MovieManager.Insert(movieVM.Movie);
+
+
+                //Inserts into tblMovieGenre
+                adds.ToList().ForEach(a =>  MovieGenreManager.Insert(movieVM.Movie.Id, a));
+
+                
 
 
 
