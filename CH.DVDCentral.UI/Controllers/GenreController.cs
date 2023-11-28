@@ -8,6 +8,7 @@ namespace CH.DVDCentral.UI.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Title = "List of Genres";
             return View(GenreManager.Load());
         }
 

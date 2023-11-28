@@ -77,8 +77,10 @@ table th {
 }
 
 .imageproplarge {
-    width: 700px;
-    height: 625px;
+    width: 525px;
+    /*25% of 700 is 525*/
+    height: 469px;
+    /*25% of 625 is 469*/
 }
 
 #overlay {

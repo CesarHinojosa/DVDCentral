@@ -6,6 +6,7 @@ namespace CH.DVDCentral.UI.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Title = "List of Formats";
             return View(FormatManager.Load());
         }
 

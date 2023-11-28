@@ -7,7 +7,7 @@ namespace CH.DVDCentral.UI.Controllers
     {
         public IActionResult Index()
         {
-            ViewBag.Title = "Rating Index";
+            ViewBag.Title = "List of all Ratings";
            
             return View(RatingManager.Load());
         }
@@ -40,6 +40,7 @@ namespace CH.DVDCentral.UI.Controllers
 
         public IActionResult Edit(int id) 
         {
+            ViewBag.Title = "Edit Rating";
             return View(RatingManager.LoadById(id));
         }
 
