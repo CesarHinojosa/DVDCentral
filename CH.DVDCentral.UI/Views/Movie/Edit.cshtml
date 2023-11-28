@@ -82,11 +82,11 @@
             <label asp-for="Movie.ImagePath" class="control-label"></label>
 
             <img class="imageproplarge m-2"
-                 alt="@Model.Movie.Description"
                  id="movieimage"
+                 alt="@Model.Movie.Description"
                  onclick="on('/images/@Model.Movie.ImagePath')" 
                  src="~/images/@Model.Movie.ImagePath"/>
-            <input asp-for="Movie.ImagePath" class="form-control" />
+          
 
             <input type="file" name="File" id="File" accept="image/" onchange="loadFile(event)" />
 
@@ -95,8 +95,10 @@
             <div class="form-group">
                 <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
+
         </form>
     </div>
+
 </div>
 
 <div class="m-2">
@@ -104,11 +106,14 @@
 </div>
 
 
-
 <script>
-    var loadfile = function (event) {
+    var loadFile = function (event) {
         var output = document.getElementById('movieimage');
         output.src = URL.createObjectURL(event.target.files[0]);
     }
 </script>
+
+
+
+
 
