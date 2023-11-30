@@ -155,7 +155,7 @@ namespace CH.DVDCentral.UI.Controllers
         {
             try
             {
-                movieVM.Movie.Id = id;
+               
                 if (movieVM.File != null)
                 {
                     movieVM.Movie.ImagePath = movieVM.File.FileName;
@@ -177,7 +177,7 @@ namespace CH.DVDCentral.UI.Controllers
 
                 newGenreIds = GetObject();
 
-                //int movieId = movieVM.
+              
 
                 //Inserts into tblMovie
                 int result = MovieManager.Insert(movieVM.Movie);
