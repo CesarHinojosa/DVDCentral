@@ -36,6 +36,10 @@
                     <a class="btn btn-sm btn-primary" asp-route-id="@item.Id" asp-action="Edit">Edit</a>
                     <a class="btn btn-sm btn-primary" asp-route-id="@item.Id" asp-action="Details">Details</a>
                     <a class="btn btn-sm btn-primary" asp-route-id="@item.Id" asp-action="Delete">Delete</a>
+
+                    <input class="btn btn-sm btn-primary"
+                    type="button"
+                    onclick="AddToCart(@item.Id)" value="+" />
                 </div>
 
             </div>
