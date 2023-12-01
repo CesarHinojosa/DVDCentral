@@ -74,4 +74,7 @@
 <div class="m-2">
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     <a asp-action="Index">Back to List</a>
+    <input class="btn btn-sm btn-primary"
+           type="button"
+           onclick="AddToCart(@Model.Id)" value="+" />
 </div>

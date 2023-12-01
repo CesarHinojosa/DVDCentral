@@ -9,6 +9,8 @@ namespace CH.DVDCentral.BL.Models
 {
     public class Order
     {
+        //public OrderItem Item { get; set; }
+
         public int Id { get; set; }
         [DisplayName("Customer Id")]
         public int CustomerId { get; set; }
@@ -22,6 +24,16 @@ namespace CH.DVDCentral.BL.Models
         public DateTime ShipDate { get; set; }
         [DisplayName("User Id")]
         public int UserId { get; set; }
+
+        [DisplayName("Total")]
+        public double Cost {
+            get
+            {
+                OrderItem item = OrderItems.FirstOrDefault();
+                return item.Cost;
+            }
+            
+        }
 
 
     }

@@ -16,13 +16,19 @@ namespace CH.DVDCentral.BL.Models
         //const double ITEM_COST = 120.03;
         public List<Movie> Items { get; set; } = new List<Movie>();
 
-        public Movie movie { get; set; }
+        //public Movie movie { get { return movie.Id; } }
+
+        
+
+        //Movie movie { get { return movie.Cost }; }
 
         public int NumberOfItems { get { return Items.Count; } }
 
         //This formats teh currency for you  //could use items.sum for DVDCentral
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public double SubTotal { get { return Items.Count * movie.Cost; } }
+
+        //TODO: Need to take a look into this
+        public double SubTotal { get { return Items.Count ; } }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
         public double Tax { get { return SubTotal * 0.055; } }
