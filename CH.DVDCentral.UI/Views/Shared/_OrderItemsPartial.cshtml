@@ -3,6 +3,13 @@
 <table id="items" class="table data-table">
     <thead>
         <tr>
+            <th>
+                Movie Title
+            </th>
+
+            <th>
+                Description
+            </th>
 
             <th>
                 Quantity
@@ -17,6 +24,12 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @* @Html.DisplayFor(modelItem => item.MovieTitle) *@
+                </td>
+                <td>
+                    @* @Html.DisplayFor(modelItem => item.MovieTitle) *@
+                </td>
 
                 <td>
                     @Html.DisplayFor(modelItem => item.Quantity)
@@ -25,9 +38,10 @@
                     @Html.DisplayFor(modelItem => item.Cost)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                    @Html.ActionLink("Details", "Details", new {  id=item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new {  id=item.Id })
+                   @*  @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                    @Html.ActionLink("Details", "Details", new {  id=item.Id }) | *@
+                  
+                    <a class="btn btn-sm btn-primary" asp-route-id="@item.Id" asp-action="Delete">Delete</a>
                 </td>
             </tr>
         }

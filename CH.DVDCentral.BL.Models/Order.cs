@@ -26,14 +26,19 @@ namespace CH.DVDCentral.BL.Models
         public int UserId { get; set; }
 
         [DisplayName("Total")]
-        public double Cost {
+        public double Cost
+        {
             get
             {
+                //DataBase hit
                 OrderItem item = OrderItems.FirstOrDefault();
                 return item.Cost;
             }
-            
         }
+
+        
+            
+       
 
 
     }
