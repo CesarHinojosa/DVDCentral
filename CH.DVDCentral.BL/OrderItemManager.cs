@@ -243,14 +243,24 @@ namespace CH.DVDCentral.BL
 
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    (from m in dc.tblOrderItems
+                    (from oi in dc.tblOrderItems
+                     join m in dc.tblMovies on oi.MovieId equals m.Id
+                     join o in dc.tblOrders on oi.OrderId equals o.Id
+                     join c in dc.tblCustomers on o.CustomerId equals c.Id
+                     join u in dc.tblUsers on c.UserId equals u.Id
+                     
                      select new
                      {
-                         m.Id,
-                         m.OrderId,
-                         m.Quantity,
-                         m.MovieId,
-                         m.Cost,
+                         oi.Id,
+                         oi.OrderId,
+                         oi.Quantity,
+                         oi.MovieId,
+                         oi.Cost,
+                         MovieTitle = m.Title,
+                         FirstName = c.FirstName, 
+                         LastName = c.LastName,
+                         UserName = u.UserName,
+                       
                      })
                      .ToList()
                      .ForEach(movie => list.Add(new OrderItem
@@ -260,6 +270,11 @@ namespace CH.DVDCentral.BL
                          Quantity = movie.Quantity,
                          MovieId = movie.MovieId,
                          Cost = (float)movie.Cost,
+                         MovieTitle = movie.MovieTitle, 
+                         FirstName = movie.FirstName,
+                         LastName = movie.LastName,
+                         UserName = movie.UserName,
+                         
                          
 
                      }));
@@ -281,15 +296,18 @@ namespace CH.DVDCentral.BL
 
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    (from m in dc.tblOrderItems
-                     where m.OrderId == orderId
+                    (from oi in dc.tblOrderItems
+                     join m in dc.tblMovies on oi.MovieId equals m.Id
+                     where oi.OrderId == orderId
                      select new
                      {
-                         m.Id,
-                         m.OrderId,
-                         m.Quantity,
-                         m.MovieId,
-                         m.Cost,
+                         oi.Id,
+                         oi.OrderId,
+                         oi.Quantity,
+                         oi.MovieId,
+                         oi.Cost,
+                         MovieTitle = m.Title,
+                         ImagePath = m.ImagePath,
                      })
                      .ToList()
                      .ForEach(movie => list.Add(new OrderItem
@@ -299,6 +317,8 @@ namespace CH.DVDCentral.BL
                          Quantity = movie.Quantity,
                          MovieId = movie.MovieId,
                          Cost = (float)movie.Cost,
+                         MovieTitle = movie.MovieTitle,
+                         ImagePath = movie.ImagePath,
 
 
                      }));

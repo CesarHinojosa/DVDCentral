@@ -4,11 +4,10 @@
     <thead>
         <tr>
             <th>
-                Movie Title
+                Movie Image
             </th>
-
             <th>
-                Description
+                Movie Title
             </th>
 
             <th>
@@ -25,12 +24,14 @@
         {
             <tr>
                 <td>
-                    @* @Html.DisplayFor(modelItem => item.MovieTitle) *@
+                    <img class="imagepropmedium"
+                         id="movieimage"
+                         onclick="on('/images/@item.ImagePath')"
+                         src="~/images/@item.ImagePath" />
                 </td>
                 <td>
-                    @* @Html.DisplayFor(modelItem => item.MovieTitle) *@
+                    @Html.DisplayFor(modelItem => item.MovieTitle)
                 </td>
-
                 <td>
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
@@ -62,3 +63,12 @@
 
 </script>
 </p>
+
+<script>
+    var loadFile = function (event) {
+        var output = document.getElementById('movieimage');
+        //whenever you see square brackets it is an array
+        output.src = URL.createObjectURL(event.target.files[0]);
+    }
+
+</script>
