@@ -26,13 +26,22 @@ namespace CH.DVDCentral.BL.Models
         [DisplayName("User Id")]
         public int UserId { get; set; }
 
-
-        [DisplayName("Cost")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public double Cost { get; set; }
 
+
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public double Total { get { return Cost * Quantity; } }
-       
+        public double SubTotal { get { return Cost ; } }
+
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        public double Tax
+        {
+            get { return SubTotal * .055; }
+        }
+
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        public double Total { get { return SubTotal + Tax; } }
+
         public double Quantity { get; set; }
 
         public string Firstname { get; set; }

@@ -20,7 +20,7 @@ namespace CH.DVDCentral.UI.Controllers
             {
                 return HttpContext.Session.GetObject<ShoppingCart>("cart");
             }
-            else
+            else  
             {
                 return new ShoppingCart();
             }

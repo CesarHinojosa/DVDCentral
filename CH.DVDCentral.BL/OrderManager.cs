@@ -198,14 +198,71 @@ namespace CH.DVDCentral.BL
             }
         }
 
+        //public static Order LoadById(int id)
+        //{
+        //    try
+        //    {
+        //        using (DVDCentralEntities dc = new DVDCentralEntities())
+        //        {
+        //            tblOrder entity = dc.tblOrders.FirstOrDefault(s => s.Id == id);
+
+        //            if (entity != null)
+        //            {
+        //                return new Order
+        //                {
+        //                    Id = entity.Id,
+        //                    CustomerId = entity.CustomerId,
+        //                    UserId = entity.UserId,
+        //                    ShipDate = entity.ShipDate,
+        //                    OrderDate = entity.OrderDate,
+                                                        
+        //                    OrderItems = OrderItemManager.LoadByOrderId(entity.Id)
+                          
+                            
+        //                };
+                       
+        //            }
+        //            else
+        //            {
+        //                throw new Exception();
+        //            }
+        //        }
+
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
+
         public static Order LoadById(int id)
         {
             try
             {
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    tblOrder entity = dc.tblOrders.FirstOrDefault(s => s.Id == id);
+                    var entity = (from o in dc.tblOrders
+                                  join oi in dc.tblOrderItems on o.Id equals oi.OrderId
+                                  join c in dc.tblCustomers on o.CustomerId equals c.Id
+                                  join m in dc.tblMovies on oi.MovieId equals m.Id
+                                  join u in dc.tblUsers on c.UserId equals u.Id
+                                  where o.Id == id
+                                  select new
+                                  {
+                                      o.Id,
+                                      o.CustomerId,
+                                      o.UserId,
+                                      o.ShipDate,
+                                      o.OrderDate,
+                                      FirstName = c.FirstName, 
+                                      LastName = c.LastName,
+                                      Cost = oi.Cost,
+                                      UserName = u.UserName,
+                                      OrderItems = OrderItemManager.LoadByOrderId(o.Id),
 
+                                  })
+                                  .FirstOrDefault();
                     if (entity != null)
                     {
                         return new Order
@@ -215,12 +272,13 @@ namespace CH.DVDCentral.BL
                             UserId = entity.UserId,
                             ShipDate = entity.ShipDate,
                             OrderDate = entity.OrderDate,
-                                                        
-                            OrderItems = OrderItemManager.LoadByOrderId(entity.Id)
-                          
-                            
+                            Firstname = entity.FirstName,
+                            Lastname = entity.LastName,
+                            Cost = entity.Cost,
+                            UserName = entity.UserName,
+                            OrderItems = OrderItemManager.LoadByOrderId(entity.Id),
+
                         };
-                       
                     }
                     else
                     {
@@ -235,64 +293,6 @@ namespace CH.DVDCentral.BL
                 throw;
             }
         }
-
-        //public static Order LoadByIdd(int id)
-        //{
-        //    try
-        //    {
-        //        //List<Order> list = new List<Order>();
-
-        //        using (DVDCentralEntities dc = new DVDCentralEntities())
-        //        {
-        //            (from o in dc.tblOrders
-        //             join u in dc.tblUsers on o.UserId equals u.Id
-        //             join oi in dc.tblOrderItems on  o.Id equals oi.OrderId
-        //             join m in dc.tblMovies on oi.MovieId equals m.Id
-        //             where o.CustomerId == id || id == null
-        //             select new
-        //             {
-        //                 o.Id,
-        //                 o.CustomerId,
-        //                 o.UserId,
-        //                 o.OrderDate,
-        //                 o.ShipDate,
-        //                 ImagePath = m.ImagePath,
-        //                 MovieTitle = m.Title,
-        //                 Quantity = m.InStkQty,
-        //                 UserFullName = u.FirstName + " " + u.LastName,
-                         
-        //             })
-        //             .ToList()
-        //             .ForEach(order => list.Add(new Order
-        //             {
-        //                 Id = order.Id,
-        //                 CustomerId = order.CustomerId,
-        //                 UserId = order.UserId,
-        //                 OrderDate = order.OrderDate,
-        //                 ShipDate = order.ShipDate,
-        //                 OrderItems = OrderItemManager.LoadByOrderId(order.Id),
-        //                 ImagePath = order.ImagePath,
-        //                 MovieTitle = order.MovieTitle,
-        //                 Quantity = order.Quantity,
-        //                 UserFullName = order.UserFullName,
-
-
-
-
-        //             }));
-        //        }
-
-        //        return list;
-        //    }
-        //     catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-
-
-
-        //}
 
         public static List<Order> Load(int? customerId = null)
         {
