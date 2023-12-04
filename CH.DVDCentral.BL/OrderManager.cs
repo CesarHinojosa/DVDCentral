@@ -215,6 +215,7 @@ namespace CH.DVDCentral.BL
                             UserId = entity.UserId,
                             ShipDate = entity.ShipDate,
                             OrderDate = entity.OrderDate,
+                                                        
                             OrderItems = OrderItemManager.LoadByOrderId(entity.Id)
                           
                             
@@ -235,6 +236,64 @@ namespace CH.DVDCentral.BL
             }
         }
 
+        //public static Order LoadByIdd(int id)
+        //{
+        //    try
+        //    {
+        //        //List<Order> list = new List<Order>();
+
+        //        using (DVDCentralEntities dc = new DVDCentralEntities())
+        //        {
+        //            (from o in dc.tblOrders
+        //             join u in dc.tblUsers on o.UserId equals u.Id
+        //             join oi in dc.tblOrderItems on  o.Id equals oi.OrderId
+        //             join m in dc.tblMovies on oi.MovieId equals m.Id
+        //             where o.CustomerId == id || id == null
+        //             select new
+        //             {
+        //                 o.Id,
+        //                 o.CustomerId,
+        //                 o.UserId,
+        //                 o.OrderDate,
+        //                 o.ShipDate,
+        //                 ImagePath = m.ImagePath,
+        //                 MovieTitle = m.Title,
+        //                 Quantity = m.InStkQty,
+        //                 UserFullName = u.FirstName + " " + u.LastName,
+                         
+        //             })
+        //             .ToList()
+        //             .ForEach(order => list.Add(new Order
+        //             {
+        //                 Id = order.Id,
+        //                 CustomerId = order.CustomerId,
+        //                 UserId = order.UserId,
+        //                 OrderDate = order.OrderDate,
+        //                 ShipDate = order.ShipDate,
+        //                 OrderItems = OrderItemManager.LoadByOrderId(order.Id),
+        //                 ImagePath = order.ImagePath,
+        //                 MovieTitle = order.MovieTitle,
+        //                 Quantity = order.Quantity,
+        //                 UserFullName = order.UserFullName,
+
+
+
+
+        //             }));
+        //        }
+
+        //        return list;
+        //    }
+        //     catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+
+
+
+        //}
+
         public static List<Order> Load(int? customerId = null)
         {
             try
@@ -244,6 +303,9 @@ namespace CH.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     (from d in dc.tblOrders
+                     join oi in dc.tblOrderItems on d.Id equals oi.Id
+                     join c in dc.tblCustomers on d.CustomerId equals c.Id
+                     join u in dc.tblUsers on d.UserId equals u.Id
                      where d.CustomerId == customerId || customerId == null
                      select new
                      {
@@ -252,6 +314,13 @@ namespace CH.DVDCentral.BL
                          d.UserId,
                          d.OrderDate,
                          d.ShipDate,
+                         oi.Quantity,
+                         oi.Cost,
+                         c.FirstName,
+                         c.LastName, 
+                         u.UserName,
+                         
+
                          //Something has to be here to link the OrderItems 
                          
 
@@ -264,6 +333,12 @@ namespace CH.DVDCentral.BL
                          UserId = order.UserId,
                          OrderDate = order.OrderDate,
                          ShipDate = order.ShipDate,
+                         Quantity = order.Quantity,
+                         Cost = order.Cost,
+                         Firstname = order.FirstName,
+                         Lastname = order.LastName,
+                         UserName = order.UserName,                         
+                         
                          OrderItems = OrderItemManager.LoadByOrderId(order.Id)
                          
 
