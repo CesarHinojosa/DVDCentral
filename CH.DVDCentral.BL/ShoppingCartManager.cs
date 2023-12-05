@@ -54,20 +54,20 @@ namespace CH.DVDCentral.BL
 
                 order.CustomerId = 1;
                 order.UserId= 1;
-                
-               
                 order.OrderDate = DateTime.Now;
                 order.ShipDate = DateTime.Now.AddDays(3);
+
                 foreach(Movie item in cart.Items)
                 {
                     
                         
                     
                     OrderItem orderItem = new OrderItem();
+                    order.Id = orderItem.Id;
                     orderItem.MovieId= item.Id;
                     orderItem.Quantity = 1;
 
-                    order.Id = orderItem.Id;
+                   
 
                     
 
