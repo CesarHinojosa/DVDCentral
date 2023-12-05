@@ -19,6 +19,13 @@ namespace CH.DVDCentral.BL.Models
         //public Movie movie { get { return movie.Id; } }
 
         
+        public double Cost
+        {
+            get
+            {
+                return Items.Sum(i => i.Cost);
+            }
+        }
 
         //Movie movie { get { return movie.Cost }; }
 
@@ -28,7 +35,11 @@ namespace CH.DVDCentral.BL.Models
         [DisplayFormat(DataFormatString = "{0:C}")]
 
         //TODO: Need to take a look into this
-        public double SubTotal { get { return Items.Count ; } }
+        public double SubTotal
+        {
+            get
+            { return NumberOfItems * Cost; }
+        }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
         public double Tax { get { return SubTotal * 0.055; } }

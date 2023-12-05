@@ -14,6 +14,8 @@ namespace CH.DVDCentral.UI.Controllers
             return View(cart);
         }
 
+            
+
         private ShoppingCart GetShoppingCart()
         {
             if (HttpContext.Session.GetObject<ShoppingCart>("cart") != null)

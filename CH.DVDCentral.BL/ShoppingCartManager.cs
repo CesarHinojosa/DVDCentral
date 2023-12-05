@@ -45,6 +45,45 @@ namespace CH.DVDCentral.BL
 
             //Decrement the tblMovie.InStkQty approriately
 
+
+
+            try
+            {
+                Order order = new Order();
+              
+
+                order.CustomerId = 1;
+                order.UserId= 1;
+                
+               
+                order.OrderDate = DateTime.Now;
+                order.ShipDate = DateTime.Now.AddDays(3);
+                foreach(Movie item in cart.Items)
+                {
+                    
+                        
+                    
+                    OrderItem orderItem = new OrderItem();
+                    orderItem.MovieId= item.Id;
+                    orderItem.Quantity = 1;
+
+                    order.Id = orderItem.Id;
+
+                    
+
+                    order.OrderItems.Add(orderItem);
+                    OrderManager.Insert(order);
+                    item.InStkQty = item.InStkQty - 1;
+
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
             cart = new ShoppingCart();
 
         }

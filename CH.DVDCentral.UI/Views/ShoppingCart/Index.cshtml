@@ -54,35 +54,41 @@
     </tbody>
 </table>
 
+
+
+
+<!--This is to display the name of the row -->
 <table class="table">
     <thead>
-        <tr>
-            <th>Total Cost</th>
-            
-        </tr>
-        <tr>
-            <th>Tax</th>
-        </tr>
-        <tr>
-            <th>Subtotal</th>
-        </tr>
-        <th></th>
         
-    </thead>
-    <tbody>
         <tr>
-        @foreach (var item in Model.Items)
-            {
-              @*   <td>
-                    @Html.DisplayFor()
-                </td> *@
-            }
+            <th>@Html.DisplayNameFor(model => model.SubTotal)</th>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.SubTotal)
+            </td>
         </tr>
+        
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Tax)</th>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Tax)
+            </td>
+        </tr>
+        
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Total)</th>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Total)
+            </td>
+        </tr>
+
+    </thead>
+
         <td>
         <a class="btn btn-sm btn-primary" asp-action="Checkout" >Check Out</a>
         </td>
 
-    </tbody>
+
 
 </table>
 
