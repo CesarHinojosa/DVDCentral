@@ -66,14 +66,17 @@ namespace CH.DVDCentral.BL
                     order.Id = orderItem.Id;
                     orderItem.MovieId= item.Id;
                     orderItem.Quantity = 1;
+                    orderItem.Cost = (float)Math.Round(item.Cost, 2);
+                    item.InStkQty = item.InStkQty - 1;
 
-                   
 
-                    
+
 
                     order.OrderItems.Add(orderItem);
                     OrderManager.Insert(order);
-                    item.InStkQty = item.InStkQty - 1;
+                    
+                    
+
 
 
                 }
