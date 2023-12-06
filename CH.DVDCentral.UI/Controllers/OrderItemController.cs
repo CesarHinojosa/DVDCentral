@@ -10,21 +10,20 @@ namespace CH.DVDCentral.UI.Controllers
             return View(OrderItemManager.Load());
         }
 
-        
-        public IActionResult Delete(int id)
+
+        public IActionResult Remove(int id)
         {
             return View(OrderItemManager.LoadById(id));
         }
 
-
         [HttpPost]
-        public IActionResult Delete(int id, OrderItem orderItem, bool rollback = false)
+        public IActionResult Remove(int id, OrderItem orderItem, bool rollback = false)
         {
             try
             {
-                int result = OrderItemManager.Delete(id, rollback);
+                int results = OrderItemManager.Delete(id, rollback);
 
-                return RedirectToAction(nameof(Index), "Order");
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {

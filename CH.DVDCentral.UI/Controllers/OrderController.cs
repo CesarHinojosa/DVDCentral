@@ -100,6 +100,7 @@ namespace CH.DVDCentral.UI.Controllers
             try
             {
                 int result = OrderManager.Delete(id, rollback);
+              
 
                 return RedirectToAction(nameof(Index));
             }

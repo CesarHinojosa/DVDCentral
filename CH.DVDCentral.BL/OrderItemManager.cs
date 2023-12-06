@@ -162,8 +162,9 @@ namespace CH.DVDCentral.BL
 
                     if (entity != null)
                     {
-                        //Removes the degreeType with the selected ID
                         dc.tblOrderItems.Remove(entity);
+                      
+
                         results = dc.SaveChanges();
 
                     }
