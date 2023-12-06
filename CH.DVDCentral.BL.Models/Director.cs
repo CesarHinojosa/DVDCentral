@@ -21,9 +21,6 @@ namespace CH.DVDCentral.BL.Models
             get { return FirstName + " " + LastName; } 
         }
 
-        
-
-
-
+        public List<Director> Directors { get; set; }
     }
 }

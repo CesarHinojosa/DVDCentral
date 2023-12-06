@@ -1,0 +1,81 @@
+﻿@model IEnumerable<CH.DVDCentral.BL.Models.Order>
+
+<table id="items" class="table data-table">
+    <thead>
+        <tr>
+            <th>
+                Order #
+            </th>
+            <th>
+               Customer Name
+            </th>
+            <th>
+                UserName
+            </th>
+            <th>
+                OrderDate
+            </th>
+            <th>
+                ShipDate
+            </th>
+            <th>
+               Total
+            </th>
+           
+
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+              
+                <td>
+                    <a asp-controller="Order" asp-action="Edit" class="btn btn-sm btn-primary" asp-route-id="@item.Id">Edit</a>
+                </td>
+                <td>
+                    <a asp-controller="Order" asp-action="Details" class="btn btn-sm btn-primary" asp-route-id="@item.Id">Details</a>
+                </td>
+                <td>
+                    <a asp-controller="Order" asp-action="Delete" class="btn btn-sm btn-primary" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script type="text/javascript" class="init">
+
+    $.noConflict();
+    jQuery(document).ready(function ($) {
+        $('#items').DataTable({
+            "lengthMenu": [[5, 10, 25, 30, -1], [5, 10, 25, 30, "All"]]
+        });
+
+    });
+
+
+</script>

@@ -56,8 +56,9 @@ namespace CH.DVDCentral.BL
                 order.UserId= 1;
                 order.OrderDate = DateTime.Now;
                 order.ShipDate = DateTime.Now.AddDays(3);
+               
 
-                foreach(Movie item in cart.Items)
+                foreach (Movie item in cart.Items)
                 {
                     
                         
@@ -67,18 +68,12 @@ namespace CH.DVDCentral.BL
                     orderItem.MovieId= item.Id;
                     orderItem.Quantity = 1;
                     orderItem.Cost = (float)Math.Round(item.Cost, 2);
-                    item.InStkQty = item.InStkQty - 1;
 
-
-
+                    Movie movie = MovieManager.LoadById(item.Id);
+                    movie.InStkQty = movie.InStkQty - 1;
 
                     order.OrderItems.Add(orderItem);
                     OrderManager.Insert(order);
-                    
-                    
-
-
-
                 }
             }
             catch (Exception)

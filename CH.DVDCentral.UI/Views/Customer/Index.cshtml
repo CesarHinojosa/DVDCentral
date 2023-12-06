@@ -4,9 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<p>
+ <p>
     <a asp-action="Create">Create New</a>
 </p>
+@*
 <table class="table">
     <thead>
         <tr>
@@ -17,9 +18,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
-          @*   <th>
-                @Html.DisplayNameFor(model => model.UserID)
-            </th> *@
+
             <th>
                 @Html.DisplayNameFor(model => model.Address)
             </th>
@@ -51,9 +50,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
-          @*   <td>
-                @Html.DisplayFor(modelItem => item.UserID)
-            </td> *@
+
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
@@ -80,4 +77,15 @@
         </tr>
 }
     </tbody>
-</table>
+</table> *@
+
+<div>
+    <partial name="_CustomerPartial" model="Model" />
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

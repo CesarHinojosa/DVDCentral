@@ -4,9 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<p>
+ <p>
     <a asp-action="Create">Create New</a>
 </p>
+@*
 <table class="table">
     <thead>
         <tr>
@@ -70,4 +71,15 @@
 }
     </tbody>
 </table>
+ *@
+<div>
+    <partial name="_OrderPartial" model="Model" />
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
 
