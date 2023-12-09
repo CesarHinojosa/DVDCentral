@@ -3,8 +3,12 @@ namespace CH.DVDCentral.UI.ViewModels
 {
     public class CustomerViewModel
     {
-        public Customer customer {  get; set; }
+        public int CustomerId { get; set; }
 
-        public List<User> users { get; set; } = new List<User>();
+        public List<Customer> Customer { get; set;}
+
+        public int UserId { get; set; }
+
+        public ShoppingCart Cart { get; set; }
     }
 }

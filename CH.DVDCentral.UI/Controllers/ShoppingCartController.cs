@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CH.DVDCentral.UI.Models;
+using CH.DVDCentral.UI.ViewModels;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using System.Xml.Linq;
 
 namespace CH.DVDCentral.UI.Controllers
@@ -64,8 +67,22 @@ namespace CH.DVDCentral.UI.Controllers
             //it os null because once you check out ther eis no cart anymores
             HttpContext.Session.SetObject("cart", null);
 
-            return View();
+            if (Authenticate.IsAuthenticated(HttpContext))
+            {
+                return View();
+            }
+            else
+            {
+                //first is action result
+                //second is the controller
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            }
         }
+
+        //public IActionResult AssignToCustomer()
+        //{
+
+        //}
 
     }
 }
