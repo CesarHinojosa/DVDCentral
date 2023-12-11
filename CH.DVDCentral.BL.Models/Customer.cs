@@ -24,5 +24,13 @@ namespace CH.DVDCentral.BL.Models
         [DisplayName("Image Path")]
         public string? ImagePath { get; set; }
 
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+
     }
 }

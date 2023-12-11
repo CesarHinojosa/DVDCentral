@@ -244,7 +244,7 @@ namespace CH.DVDCentral.BL
         }
 
 
-        public static List<Customer> Load()
+        public static List<Customer> Load(int? userId = null)
         {
             try
             {
@@ -253,6 +253,7 @@ namespace CH.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     (from d in dc.tblCustomers
+                     where d.UserId == userId || userId == null
                      select new
                      {
                          d.Id,

@@ -5,10 +5,10 @@ namespace CH.DVDCentral.UI.ViewModels
     {
         public int CustomerId { get; set; }
 
-        public List<Customer> Customer { get; set;}
+        public List<Customer> Customer { get; set;} = new List<Customer>();
 
         public int UserId { get; set; }
 
-        public ShoppingCart Cart { get; set; }
+        public ShoppingCart Cart { get; set; } = new ShoppingCart();
     }
 }

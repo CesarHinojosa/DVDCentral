@@ -19,10 +19,6 @@ namespace CH.DVDCentral.BL
                                  ref int id,       // this is by reference (ref or out)
                                  bool rollback = false) //optional paramater
         {
-            //What do you need in order for this method to run 
-            //Reference or by value 
-            //No idea what the ID is
-            //We know the FN,LN,OrderID
             
             try
             {
@@ -78,7 +74,7 @@ namespace CH.DVDCentral.BL
                     entity.CustomerId = order.CustomerId;
                     entity.UserId = order.UserId;
                     entity.OrderDate = DateTime.Now;
-                    entity.ShipDate = DateTime.Now;
+                    entity.ShipDate = DateTime.Now.AddDays(3);
 
                     foreach (OrderItem item in order.OrderItems)
                     {
@@ -243,8 +239,9 @@ namespace CH.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     var entity = (from o in dc.tblOrders
-                                  join oi in dc.tblOrderItems on o.Id equals oi.OrderId
+                                  
                                   join c in dc.tblCustomers on o.CustomerId equals c.Id
+                                  join oi in dc.tblOrderItems on o.Id equals oi.OrderId
                                   join m in dc.tblMovies on oi.MovieId equals m.Id
                                   join u in dc.tblUsers on c.UserId equals u.Id
                                   where o.Id == id
@@ -257,7 +254,7 @@ namespace CH.DVDCentral.BL
                                       o.OrderDate,
                                       FirstName = c.FirstName, 
                                       LastName = c.LastName,
-                                      Cost = oi.Cost,
+                                      
                                       UserName = u.UserName,
                                       OrderItems = OrderItemManager.LoadByOrderId(o.Id),
 
@@ -274,7 +271,7 @@ namespace CH.DVDCentral.BL
                             OrderDate = entity.OrderDate,
                             Firstname = entity.FirstName,
                             Lastname = entity.LastName,
-                            Cost = entity.Cost,
+                           
                             UserName = entity.UserName,
                             OrderItems = OrderItemManager.LoadByOrderId(entity.Id),
 
@@ -303,7 +300,6 @@ namespace CH.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     (from d in dc.tblOrders
-                     join oi in dc.tblOrderItems on d.Id equals oi.Id
                      join c in dc.tblCustomers on d.CustomerId equals c.Id
                      join u in dc.tblUsers on d.UserId equals u.Id
                      where d.CustomerId == customerId || customerId == null
@@ -314,8 +310,6 @@ namespace CH.DVDCentral.BL
                          d.UserId,
                          d.OrderDate,
                          d.ShipDate,
-                         oi.Quantity,
-                         oi.Cost,
                          c.FirstName,
                          c.LastName, 
                          u.UserName,
@@ -333,8 +327,6 @@ namespace CH.DVDCentral.BL
                          UserId = order.UserId,
                          OrderDate = order.OrderDate,
                          ShipDate = order.ShipDate,
-                         Quantity = order.Quantity,
-                         Cost = order.Cost,
                          Firstname = order.FirstName,
                          Lastname = order.LastName,
                          UserName = order.UserName,                         

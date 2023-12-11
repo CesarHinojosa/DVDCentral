@@ -31,7 +31,7 @@ namespace CH.DVDCentral.BL.Models
 
 
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public double SubTotal { get { return Cost ; } }
+        public double SubTotal { get { return OrderItems.Sum(i => i.Quantity * i.Cost); } }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
         public double Tax
@@ -41,8 +41,6 @@ namespace CH.DVDCentral.BL.Models
 
         [DisplayFormat(DataFormatString = "{0:C}")]
         public double Total { get { return SubTotal + Tax; } }
-
-        public double Quantity { get; set; }
 
         public string Firstname { get; set; }
 

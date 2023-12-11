@@ -19,11 +19,12 @@ namespace CH.DVDCentral.UI.Controllers
             return View(item);
         }
 
-        public IActionResult Create()
+        public IActionResult Create(string returnUrl)
         {
             ViewBag.Title = "Create a Customer";
             if (Authenticate.IsAuthenticated(HttpContext))
             {
+                TempData["returnUrl"] = returnUrl;
                 return View();
             }
             else
@@ -41,7 +42,14 @@ namespace CH.DVDCentral.UI.Controllers
         {
             try
             {
+                customer.UserID = HttpContext.Session.GetObject<User>("user").Id;
+
                 int result = CustomerManager.Insert(customer);
+
+                if (TempData["returnUrl"] != null)
+                {
+                    return Redirect(TempData["returnUrl"]?.ToString());
+                }
 
                 return RedirectToAction(nameof(Index));
             }
