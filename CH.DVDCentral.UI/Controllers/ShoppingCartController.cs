@@ -2,6 +2,7 @@
 using CH.DVDCentral.UI.ViewModels;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using System.Xml.Linq;
 
 namespace CH.DVDCentral.UI.Controllers
@@ -98,14 +99,22 @@ namespace CH.DVDCentral.UI.Controllers
 
             customerViewModel.Customer = CustomerManager.Load(customerViewModel.UserId);
 
+            
+
             if (customerViewModel.UserId != null)
             {
                 if (customerViewModel.Customer.Count > 0) 
                 {
                     customerViewModel.CustomerId = customerViewModel.Customer.FirstOrDefault().Id;
-                    
                 }
-                  
+                if (customerViewModel.Customer.Count <= 0)
+                {
+                    customerViewModel.Customer = CustomerManager.Load();
+
+                    // Assuming there is a specific property (e.g., Id) you want to use from the loaded customers
+                    customerViewModel.CustomerId = customerViewModel.Customer.FirstOrDefault().Id;
+
+                }
             }
             else
             {
