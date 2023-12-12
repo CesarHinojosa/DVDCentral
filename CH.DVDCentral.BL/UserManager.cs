@@ -81,7 +81,6 @@ namespace CH.DVDCentral.BL
                 {
                     User user = new User
                     {
-                        
                         UserName = "kfrog",
                         FirstName = "Kermit",
                         LastName = "The frog",
@@ -95,6 +94,15 @@ namespace CH.DVDCentral.BL
                         FirstName = "Brain",
                         LastName = "Foote",
                         Password = "maple"
+                    };
+                    Insert(user);
+
+                    user = new User
+                    {
+                        UserName = "JohnCena",
+                        FirstName = "John",
+                        LastName = "Cena",
+                        Password = "JohnCena"
                     };
                     Insert(user);
 
